@@ -19,3 +19,12 @@ CREATE TABLE categorias(
     fecha_ingreso TIMESTAMP,
     fecha_modificacion TIMESTAMP
 )
+
+CREATE TABLE usuarios(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(15) NOT NULL,
+    password VARCHAR NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    fecha_ingreso TIMESTAMP,
+    fecha_modificacion TIMESTAMP
+)

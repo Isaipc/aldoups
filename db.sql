@@ -11,3 +11,11 @@ CREATE TABLE productos(
     fecha_ingreso TIMESTAMP
     fecha_modificacion TIMESTAMP
 );
+
+CREATE TABLE categorias(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(60) NOT NULL,
+    descripcion TEXT,
+    fecha_ingreso TIMESTAMP,
+    fecha_modificacion TIMESTAMP
+)

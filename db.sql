@@ -29,6 +29,18 @@ CREATE TABLE usuarios(
     fecha_modificacion TIMESTAMP
 )
 
+CREATE TABLE ventas(
+    id INT NOT NULL AUTO_INCREMENT,
+    total DOUBLE NOT NULL,
+    fecha_venta TIMESTAMP,
+    usuario_id INT NOT NULL,
+
+    PRIMARY KEY (id)
+
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuarios(id)
+) ENGINET=INNODB;
+
 CREATE TABLE producto_vendido(
     id INT AUTO_INCREMENT,
     producto_id INT NOT NULL,

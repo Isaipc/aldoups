@@ -5,43 +5,23 @@
     <title>INCIO</title>
     <meta charset="UTF-8">
     <meta name="Pagina_inicio" content="pagina principal del proyecto de programacion web">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/app.css">
+    <?php include 'includes/head.php' ?>
 </head>
 
 <body>
+    <?php include 'includes/navbar.php'; ?>
     <div class="container p-2">
-        <h2 class="titulo">VEZAG DISTRIBUIDORA AUTORIZADO XD</h2>
-
-
-        <!-- Catalogos -->
-        <a href="categorias/" class="btn btn-primary">
-            <i class="bi bi-collection"></i>
-            Categorias
-        </a>
-        <a href="productos/" class="btn btn-primary">
-            <i class="bi bi-box"></i>
-            Productos
-        </a>
-        <a class="btn btn-primary">
-            <i class="bi bi-search"></i>
-            Busqueda</a>
-        <!-- Realizar Venta -->
         <a href="" class="btn btn-primary">
             <i class="bi bi-currency-dollar"></i>
             Realizar venta
         </a>
-        <!-- Generar Corte de Caja -->
-        <a href="corte_caja.html"><button type="button" class="btn btn-primary"> Generar corte de caja </button></a>
-        <!-- Productos Mas Vendidos -->
-        <a href="mas_vendidos.html"><button type="button" class="btn btn-primary"> Productos mas vendidos </button></a>
-
-
-        <!-- Operaciones -->
+        <a href="" class="btn btn-primary">
+            <i class="bi bi-check-lg"></i>
+            Realizar corte de caja
+        </a>
+        <h2 class="text-center py-5"> VEZAG DISTRIBUIDORA AUTORIZADO XD </h2>
         <!-- Busqueda -->
-        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-            tabindex="-1">
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -66,8 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-            tabindex="-1">
+        <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -86,8 +65,7 @@
 
 
     </div>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <?php include 'includes/scripts.php' ?>
 </body>
 
 </html>

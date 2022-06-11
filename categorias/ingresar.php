@@ -1,6 +1,6 @@
 <?php
 
-include '../conexionBD.php';
+include '../database/conexion.php';
 
 if (count($_POST) == 0)
     die(http_response_code(400));

@@ -4,18 +4,6 @@ CREATE DATABASE aldoups_proyecto;
 
 USE aldoups_proyecto;
 
-CREATE TABLE productos(
-    id INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(60) NOT NULL,
-    precio DOUBLE NOT NULL,
-    descripcion TEXT NOT NULL,
-    stock INT NOT NULL,
-    fecha_ingreso TIMESTAMP,
-    fecha_modificacion TIMESTAMP,
-    
-    PRIMARY KEY (id)
-) ENGINE=INNODB;
-
 CREATE TABLE categorias(
     id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(60) NOT NULL,
@@ -25,6 +13,23 @@ CREATE TABLE categorias(
 
     PRIMARY KEY (id)
 ) ENGINE=INNODB;
+
+CREATE TABLE productos(
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(60) NOT NULL,
+    precio DOUBLE NOT NULL,
+    descripcion TEXT NOT NULL,
+    stock INT NOT NULL,
+    fecha_ingreso TIMESTAMP,
+    fecha_modificacion TIMESTAMP,
+    categoria_id INT NOT NULL,
+    
+    PRIMARY KEY (id),
+
+    FOREIGN KEY (categoria_id)
+        REFERENCES categorias(id)
+) ENGINE=INNODB;
+
 
 CREATE TABLE usuarios(
     id INT NOT NULL AUTO_INCREMENT,

@@ -1,8 +1,12 @@
 <?php
-
+header("Content-Type: application/json; charset=UTF-8");
 include '../database/conexion.php';
 
-if (count($_POST) == 0)
+$json = file_get_contents("php://input");
+$data = json_decode($json);
+
+
+if ($data == null)
     die(http_response_code(400));
 
 try {
@@ -10,12 +14,19 @@ try {
     categorias(nombre, descripcion)
     VALUES(:nombre, :descripcion)');
 
-    $sql->bindParam(':nombre', $_POST['nombre']);
-    $sql->bindParam(':descripcion', $_POST['descripcion']);
-    $sql->execute();
+    $sql->bindParam(':nombre', $data->nombre);
+    $sql->bindParam(':descripcion', $data->descripcion);
+    $result = $sql->execute();
 
-    echo $sql->rowCount() > 0  ?
-        http_response_code(201) :  http_response_code(400);
+    $id = $conn->lastInsertId();
+
+    $sql = $conn->prepare('SELECT * FROM categorias WHERE id=?');
+    $sql->execute([$id]);
+    $json = json_encode($sql->fetchObject());
+
+    echo $json;
+
+    // echo $sql->rowCount() > 0 ? json_encode($sql):  http_response_code(400);
 } catch (PDOException $e) {
     die('ERROR : ' . $e);
 }

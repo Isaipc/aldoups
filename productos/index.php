@@ -55,16 +55,16 @@
                             <div class="row">
                                 <input type="hidden" name="id" id="id">
                                 <div class="row mb-3">
-                                    <input id="nombre" name="nombre" type="text" class="text-uppercase form-control">
+                                    <input id="nombre" name="nombre" type="text" class="form-control">
                                     <label for="nombre">Nombre</label>
                                 </div>
                                 <div class="row mb-3">
-                                    <input id="precio" name="precio" type="text" class="text-uppercase form-control">
+                                    <input id="precio" name="precio" type="text" class="form-control">
                                     <label for="precio">Precio</label>
                                 </div>
                                 <div class="row mb-3">
-                                    <input id="stock" name="stock" type="text" class="text-uppercase form-control">
-                                    <label for="stock">Cantidad</label>
+                                    <input id="stock" name="stock" type="text" class="form-control">
+                                    <label for="stock">Stock</label>
                                 </div>
                                 <div class="row mb-3">
                                     <input id="descripcion" type="text" name="descripcion" class="text-uppercase form-control">
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <select id="categoria" name="categoria" class="form-select" aria-label="Default select example">
-                                        <option selected>--SELECCIONA --</option>
+                                        <option selected>--SELECCIONA UNA CATEGORIA--</option>
                                     </select>
                                     <label for="category">categoria</label>
                                 </div>
@@ -123,32 +123,34 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">Nombre</div>
-                                <label id="nombre-agregar" class="col-6">[nombre]</label>
+                            <div class="row mb-2">
+                                <span class="col-6">Nombre</span>
+                                <label id="_nombre" class="col-6">[nombre]</label>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">Precio</div>
-                                <label for="precio-agregar" class="col-6">[precio]</label>
+                            <div class="row mb-2">
+                                <span class="col-6">Precio</span>
+                                <label id="_precio" class="col-6">[precio]</label>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">Cantidad</div>
-                                <label for="cantidad-agregar" class="col-6">[cantidad]</label>
+                            <div class="row mb-2">
+                                <span class="col-6">Stock</span>
+                                <label id="_cantidad" class="col-6">[stock]</label>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">Descripcion de producto
-                                </div>
-                                <label for="descripcion-agregar" class="col-6">[descripcion]</label>
+                            <div class="row mb-2">
+                                <span class="col-6">Descripcion del producto</span>
+                                <label id="_descripcion" class="col-6">[descripcion]</label>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">categoria</div>
-                                <label for="categoria-agregar" class="col-6">[categoria]</label>
+                            <div class="row mb-2">
+                                <span class="col-6">Categoria</span>
+                                <label id="_categoria" class="col-6">[categoria]</label>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">Fecha de igreso</div>
-                                <label for="fecha-agregar" class="col-6">[fecha]</label>
+                            <div class="row mb-2">
+                                <span class="col-6">Fecha de ingreso</span>
+                                <label id="_fecha_ingreso" class="col-6">[fecha]</label>
                             </div>
-
+                            <div class="row mb-2">
+                                <span class="col-6">Fecha de modificacion</span>
+                                <label id="_fecha_modificacion" class="col-6">[fecha]</label>
+                            </div>
                         </div>
                     </div>
                 </div>

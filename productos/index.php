@@ -14,45 +14,64 @@
 
     <div class="container p-2">
         <h2>Productos</h2>
+        <!-- Agregar -->
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngresar">
             <i class="bi bi-plus"></i>
-            Agregar
+            Nuevo
+        </button>
+        <!-- Eliminar -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">
+            Eliminar
         </button>
 
+        <!-- Tabla de visualizacion de datos -->
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-responsive table-hover table-striped">
+                    <thead>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Descripcion</th>
+                        <th>Stock</th>
+                        <th>Fecha de ingreso</th>
+                        <th>Fecha de modificacion</th>
+                    </thead>
+                    <tbody id="productos"></tbody>
+                </table>
+            </div>
+        </div>
+
         <div class="modal fade" id="modalIngresar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nueva insercion</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nueva producto</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body px-5">
                         <!-- creacion de formulario -->
-                        <form id="form" action="#" method="post" onsubmit="return valida(this);">
+                        <form id="form" method="post">
                             <div class="row">
                                 <input type="hidden" name="id" id="id">
-                                <div class="col-lg-6 col-md-6 md-form">
-                                    <input id="name" name="nombre" type="text" class="text-uppercase form-control">
-                                    <label for="name">nombre</label>
+                                <div class="row mb-3">
+                                    <input id="nombre" name="nombre" type="text" class="text-uppercase form-control">
+                                    <label for="nombre">Nombre</label>
                                 </div>
-                                <div class="col-lg-6 col-md-6 md-form">
-                                    <input id="cost" name="precio" type="text" class="text-uppercase form-control">
-                                    <label for="cost">Precio</label>
+                                <div class="row mb-3">
+                                    <input id="precio" name="precio" type="text" class="text-uppercase form-control">
+                                    <label for="precio">Precio</label>
                                 </div>
-                                <div class="col-lg-6 col-md-6 md-form">
+                                <div class="row mb-3">
                                     <input id="stock" name="stock" type="text" class="text-uppercase form-control">
-                                    <label for="stock">cantidad</label>
+                                    <label for="stock">Cantidad</label>
                                 </div>
-                                <div class="col-lg-6 col-md-6 md-form">
-                                    <input id="date" name="fecha" type="date" class="text-uppercase form-control">
-                                    <label for="date">fecha de ingreso</label>
+                                <div class="row mb-3">
+                                    <input id="descripcion" type="text" name="descripcion" class="text-uppercase form-control">
+                                    <label for="descripcion">Descripcion de producto </label>
                                 </div>
-                                <div class="col-lg-6 col-md-6 md-form">
-                                    <input type="text" name="descripcion" id="desc" class="text-uppercase form-control">
-                                    <label for="desc"> descripcion de producto </label>
-                                </div>
-                                <div class="col-lg-6 col-md-6 md-form">
-                                    <select id="category" name="categoria" class="form-select" aria-label="Default select example">
+                                <div class="row mb-3">
+                                    <select id="categoria" name="categoria" class="form-select" aria-label="Default select example">
                                         <option selected>--SELECCIONA --</option>
                                     </select>
                                     <label for="category">categoria</label>
@@ -67,11 +86,6 @@
                 </div>
             </div>
         </div>
-        <!-- Eliminar -->
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-            eliminar
-        </button>
-
 
         <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -94,29 +108,6 @@
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
                     </form>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Tabla de visualizacion de datos -->
-
-        <div class="card">
-            <div class="card-body">
-                <table id="account-grid" class="table table-responsive table-hover">
-                    <thead>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Descripcion</th>
-                        <th>Categoria</th>
-                        <th>Fecha de ingreso</th>
-                    </thead>
-                    <tbody id="account-grid-body"></tbody>
-                </table>
-                <div id="grid-alert" class="alert alert-warning" role="alert">
-                    <i class="fas fa-info-circle"></i><strong id="grid-message"></strong>
                 </div>
             </div>
         </div>
@@ -165,6 +156,7 @@
         </div>
     </div>
     <?php include '../includes/scripts.php' ?>
+    <script type="module" src="../js/productos.js"></script>
 </body>
 
 </html>

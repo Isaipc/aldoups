@@ -1,1 +1,1 @@
-const url = 'http://ups.test'
+const ROOT_URL = 'http://ups.test'

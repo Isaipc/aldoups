@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-MX">
 
 <head>
     <meta charset="UTF-8">
@@ -13,8 +13,7 @@
     <?php include '../includes/navbar.php'; ?>
 
     <div class="container p-2">
-
-        <h1>Productos</h1>
+        <h2>Productos</h2>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngresar">
             <i class="bi bi-plus"></i>
             Agregar

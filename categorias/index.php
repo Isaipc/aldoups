@@ -21,32 +21,30 @@
         <!-- Tabla de visualizacion de datos -->
         <div class="card">
             <div class="card-body">
-                <table id="account-grid" class="table table-responsive table-hover">
+                <table class="table table-responsive table-hover table-striped">
                     <thead>
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
                         <th>Fecha de ingreso</th>
+                        <th>Fecha de modificacion</th>
                     </thead>
                     <tbody id="categorias"></tbody>
                 </table>
-                <div id="grid-alert" class="alert alert-warning" role="alert">
-                    <i class="fas fa-info-circle"></i><strong id="grid-message"></strong>
-                </div>
             </div>
         </div>
 
         <!-- Modal ingreso -->
-        <div class="modal fade" id="modalIngresar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nueva categoria</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body px-5">
-                        <!-- creacion de formulario -->
-                        <form id="form" action="#" method="POST" onsubmit="return valida(this);">
+        <form id="form" action="#" method="POST">
+            <div class="modal fade" id="modalIngresar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Nueva categoria</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body px-5">
+                            <!-- creacion de formulario -->
                             <div class="row mb-2">
                                 <input type="hidden" name="id" id="id">
                                 <input id="nombre" name="nombre" type="text" class="form-control">
@@ -56,15 +54,15 @@
                                 <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
                                 <label for="descripcion">Descripcion<label>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button class="btn btn-success btn-rounded" type="submit">Guardar</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-success btn-rounded" type="submit">Guardar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
         <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -92,28 +90,32 @@
 
         <!-- Modal detalle -->
         <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modelTitledIs" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <h5 class="modal tittle text-white font-weight-bold">Detalle del producto</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalles de la categoría</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">Nombre</div>
-                                <label id="nombre-agregar" class="col-6">[nombre]</label>
-                            </div>
-                            <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">Descripcion
-                            </div>
-                            <label for="descripcion-agregar" class="col-6">[descripcion]</label>
+                        <div class="row mb-1">
+                            <span> Nombre: </span>
+                            <span id="_nombre">[nombre]</span>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-4 text-primary font-weight-bold">Fecha de igreso</div>
-                            <label for="fecha-agregar" class="col-6">[fecha]</label>
+                        <div class="row mb-1">
+                            <span class="col"> Descripcion: </span>
+                            <span class="col" id="_descripcion">[descripcion]</span>
                         </div>
+                        <div class="row mb-1">
+                            <span> Fecha de igreso: </span>
+                            <span id="_fecha_ingreso">[fecha]</span>
+                        </div>
+                        <div class="row mb-1">
+                            <span> Fecha de modifiacion: </span>
+                            <span id="_fecha_modificacion">[fecha]</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,6 @@
+// @Imports 
+import { categorias_url } from './common'
+
 // @Componentes BS5 
 const modalOptions = {
     keyboard: true
@@ -6,7 +9,6 @@ const modalIngresar = new bootstrap.Modal('#modalIngresar', modalOptions)
 const modalDetalle = new bootstrap.Modal('#modalDetalle', modalOptions)
 
 // Elementos necesarios
-const endpoint = `${url}/categorias`
 const form = document.getElementById('form')
 const categorias = document.getElementById('categorias')
 
@@ -18,7 +20,7 @@ cargarTodos()
 form.addEventListener('submit', function (e) {
     e.preventDefault()
 
-    const url = `${endpoint}/agregar`
+    const url = `${categorias_url}/agregar`
     const data = {
         nombre: document.getElementById('nombre').value,
         descripcion: document.getElementById('descripcion').value,
@@ -51,7 +53,7 @@ async function agregar(url, data) {
 }
 
 function cargarTodos() {
-    const url = `${endpoint}/list`
+    const url = `${categorias_url}/list`
 
     fetch(url, {
         method: 'GET',

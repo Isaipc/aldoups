@@ -122,7 +122,7 @@
         </div>
     </div>
     <?php include '../includes/scripts.php' ?>
-    <script src="../js/categorias.js"></script>
+    <script type="module" src="../js/categorias.js"></script>
 </body>
 
 </html>

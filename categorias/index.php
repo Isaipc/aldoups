@@ -28,6 +28,7 @@
                         <th>Descripcion</th>
                         <th>Fecha de ingreso</th>
                         <th>Fecha de modificacion</th>
+                        <th>Acciones</th>
                     </thead>
                     <tbody id="categorias"></tbody>
                 </table>
@@ -51,7 +52,7 @@
                                 <label for="nombre">Nombre</label>
                             </div>
                             <div class="row">
-                                <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
+                                <input id="descripcion" name="descripcion" type="text" class="form-control">
                                 <label for="descripcion">Descripcion<label>
                             </div>
                         </div>
@@ -98,20 +99,20 @@
                     </div>
                     <div class="modal-body">
                         <div class="row mb-1">
-                            <span> Nombre: </span>
-                            <span id="_nombre">[nombre]</span>
+                            <span class="col-6"> Nombre: </span>
+                            <span id="_nombre" class="col-6">[nombre]</span>
                         </div>
                         <div class="row mb-1">
-                            <span class="col"> Descripcion: </span>
-                            <span class="col" id="_descripcion">[descripcion]</span>
+                            <span class="col-6" class="col"> Descripcion: </span>
+                            <span class="col" class="col-6" id="_descripcion">[descripcion]</span>
                         </div>
                         <div class="row mb-1">
-                            <span> Fecha de igreso: </span>
-                            <span id="_fecha_ingreso">[fecha]</span>
+                            <span class="col-6"> Fecha de igreso: </span>
+                            <span id="_fecha_ingreso" class="col-6">[fecha]</span>
                         </div>
                         <div class="row mb-1">
-                            <span> Fecha de modifiacion: </span>
-                            <span id="_fecha_modificacion">[fecha]</span>
+                            <span class="col-6"> Fecha de modifiacion: </span>
+                            <span id="_fecha_modificacion" class="col-6">[fecha]</span>
                         </div>
                     </div>
                     <div class="modal-footer">

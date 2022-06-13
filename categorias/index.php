@@ -46,8 +46,8 @@
                         </div>
                         <div class="modal-body px-5">
                             <!-- creacion de formulario -->
+                            <input type="hidden" name="id" id="id">
                             <div class="row mb-2">
-                                <input type="hidden" name="id" id="id">
                                 <input id="nombre" name="nombre" type="text" class="form-control">
                                 <label for="nombre">Nombre</label>
                             </div>
@@ -64,30 +64,6 @@
                 </div>
             </div>
         </form>
-        <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Eliminar elemento</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="#" method="post" onsubmit="return validaE(this);">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 md-form">
-                                    <input type="text" name="Enombre" id="Ename" class="text-uppercase form-control">
-                                    <label for="Ename">Nombre</label>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 
         <!-- Modal detalle -->
         <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modelTitledIs" aria-hidden="true">

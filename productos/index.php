@@ -32,8 +32,8 @@
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Precio</th>
-                        <th>Descripcion</th>
                         <th>Stock</th>
+                        <th>Categoria</th>
                         <th>Fecha de ingreso</th>
                         <th>Fecha de modificacion</th>
                     </thead>
@@ -67,12 +67,12 @@
                                     <label for="stock">Stock</label>
                                 </div>
                                 <div class="row mb-3">
-                                    <input id="descripcion" type="text" name="descripcion" class="text-uppercase form-control">
+                                    <input id="descripcion" type="text" name="descripcion" class="form-control">
                                     <label for="descripcion">Descripcion de producto </label>
                                 </div>
                                 <div class="row mb-3">
                                     <select id="categoria" name="categoria" class="form-select" aria-label="Default select example">
-                                        <option selected>--SELECCIONA UNA CATEGORIA--</option>
+                                        <option>--SELECCIONA UNA CATEGORIA--</option>
                                     </select>
                                     <label for="category">categoria</label>
                                 </div>
@@ -115,11 +115,9 @@
         <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modelTitledIs" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header bg-primary">
+                    <div class="modal-header">
                         <h5 class="modal tittle text-white font-weight-bold">Detalle del producto</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
@@ -133,7 +131,7 @@
                             </div>
                             <div class="row mb-2">
                                 <span class="col-6">Stock</span>
-                                <label id="_cantidad" class="col-6">[stock]</label>
+                                <label id="_stock" class="col-6">[stock]</label>
                             </div>
                             <div class="row mb-2">
                                 <span class="col-6">Descripcion del producto</span>

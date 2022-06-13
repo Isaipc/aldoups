@@ -8,8 +8,8 @@ CREATE TABLE categorias(
     id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(60) NOT NULL,
     descripcion TEXT,
-    fecha_ingreso TIMESTAMP,
-    fecha_modificacion TIMESTAMP,
+    fecha_ingreso TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id)
 ) ENGINE=INNODB;
@@ -20,8 +20,8 @@ CREATE TABLE productos(
     precio DOUBLE NOT NULL,
     descripcion TEXT NOT NULL,
     stock INT NOT NULL,
-    fecha_ingreso TIMESTAMP,
-    fecha_modificacion TIMESTAMP,
+    fecha_ingreso TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     categoria_id INT NOT NULL,
     
     PRIMARY KEY (id),
@@ -36,8 +36,8 @@ CREATE TABLE usuarios(
     username VARCHAR(15) NOT NULL,
     password VARCHAR(100) NOT NULL,
     nombre VARCHAR(30) NOT NULL,
-    fecha_ingreso TIMESTAMP,
-    fecha_modificacion TIMESTAMP,
+    fecha_ingreso TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id)
 ) ENGINE=INNODB;
@@ -45,7 +45,7 @@ CREATE TABLE usuarios(
 CREATE TABLE ventas(
     id INT NOT NULL AUTO_INCREMENT,
     total DOUBLE NOT NULL,
-    fecha_venta TIMESTAMP,
+    fecha_venta TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     usuario_id INT NOT NULL,
 
     PRIMARY KEY (id),

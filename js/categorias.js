@@ -2,8 +2,8 @@
 import { agregar, editar, cargar, eliminar, cargarTodos } from './categorias.operaciones'
 
 // @Componentes BS5 
-const modalIngresarEl = document.getElementById('modalIngresar')
-const modalIngresar = new bootstrap.Modal(modalIngresarEl)
+const modalGuardarEl = document.getElementById('modalGuardar')
+const modalGuardar = new bootstrap.Modal(modalGuardarEl)
 const modalDetalle = new bootstrap.Modal('#modalDetalle')
 
 // Elementos necesarios
@@ -14,13 +14,12 @@ const categorias = document.getElementById('categorias')
 mostrarTodos()
 
 // @Eventos
-
-modalIngresarEl.addEventListener('show.bs.modal', event => {
-    modalIngresarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
-    form.reset()
+modalGuardarEl.addEventListener('show.bs.modal', () => {
+    modalGuardarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
 })
 
-modalIngresarEl.addEventListener('shown.bs.modal', () => document.getElementById('nombre').focus())
+modalGuardarEl.addEventListener('shown.bs.modal', () => document.getElementById('nombre').focus())
+modalGuardarEl.addEventListener('hidden.bs.modal', () => form.reset())
 
 form.addEventListener('submit', event => {
     event.preventDefault()
@@ -45,7 +44,7 @@ function guardar(data) {
 
         agregar(data)
             .then(data => {
-                modalIngresar.hide()
+                modalGuardar.hide()
                 setDetalles(data)
                 mostrarTodos()
             })
@@ -55,7 +54,7 @@ function guardar(data) {
 
         editar(data)
             .then(data => {
-                modalIngresar.hide()
+                modalGuardar.hide()
                 setDetalles(data)
                 mostrarTodos()
             })
@@ -138,8 +137,8 @@ function getFormData() {
 }
 
 function setFormData(data) {
-    modalIngresar.show()
-    modalIngresarEl.querySelector('.modal-title').textContent = 'Editar categoría'
+    modalGuardar.show()
+    modalGuardarEl.querySelector('.modal-title').textContent = 'Editar categoría'
     document.getElementById('id').value = data.id
     document.getElementById('nombre').value = data.nombre
     document.getElementById('descripcion').value = data.descripcion

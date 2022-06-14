@@ -13,7 +13,7 @@
     <?php include '../includes/navbar.php' ?>
     <div class="container p-2">
         <h2>Categorias</h2>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngresar">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalGuardar">
             <i class="bi bi-plus"></i>
             Nuevo
         </button>
@@ -37,7 +37,7 @@
 
         <!-- Modal ingreso -->
         <form id="form" action="#" method="POST">
-            <div class="modal fade" id="modalIngresar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">

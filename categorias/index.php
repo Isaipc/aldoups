@@ -46,7 +46,7 @@
                         </div>
                         <div class="modal-body px-5">
                             <!-- creacion de formulario -->
-                            <input type="hidden" name="id" id="id">
+                            <input id="id" name="id" type="number" class="d-none">
                             <div class="row mb-2">
                                 <input id="nombre" name="nombre" type="text" class="form-control">
                                 <label for="nombre">Nombre</label>

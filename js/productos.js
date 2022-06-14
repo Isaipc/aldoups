@@ -1,6 +1,6 @@
 // @Import 
-import { agregar, editar, cargar, eliminar, cargarTodos } from './productos.operaciones'
-import { cargarTodos as cargarCategorias } from './categorias.operaciones'
+import { agregar, editar, cargar, eliminar, cargarTodos } from './servicios/productos.operaciones'
+import { cargarTodos as cargarCategorias } from './servicios/categorias.operaciones'
 
 // @Componentes BS5 
 const modalGuardarEl = document.getElementById('modalGuardar')

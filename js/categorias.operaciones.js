@@ -36,4 +36,4 @@ async function cargar(data) {
     return response.json()
 }
 
-export { agregar, modificar, cargar, eliminar, cargarTodos }
+export { agregar, editar, cargar, eliminar, cargarTodos }

@@ -1,6 +1,5 @@
 // @Imports 
-import { categorias_url } from './common'
-import { agregar, modificar, cargar, eliminar, cargarTodos } from './categorias.operaciones'
+import { agregar, editar, cargar, eliminar, cargarTodos } from './categorias.operaciones'
 
 // @Componentes BS5 
 const modalOptions = {
@@ -18,7 +17,10 @@ const categorias = document.getElementById('categorias')
 mostrarTodos()
 
 // @Eventos
-modalIngresarEl.addEventListener('show.bs.modal', event => form.reset())
+modalIngresarEl.addEventListener('show.bs.modal', event => {
+    modalIngresarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
+    form.reset()
+})
 
 form.addEventListener('submit', event => {
     event.preventDefault()
@@ -26,16 +28,8 @@ form.addEventListener('submit', event => {
     if (!validaciones())
         return false;
 
-    agregar(getFormData())
-        .then(data => {
-            modalIngresar.hide()
-
-            form.reset()
-            setDetalles(data)
-            mostrarTodos()
-        })
-        .catch((error) => console.log(error))
-
+    const data = getFormData()
+    guardar(data)
 })
 
 // @Funciones
@@ -43,6 +37,30 @@ function mostrarTodos() {
     cargarTodos()
         .then(data => renderFilas(data))
         .catch(error => console.log(error))
+}
+
+function guardar(data) {
+
+    if (data.id === '') {
+
+        agregar(data)
+            .then(data => {
+                modalIngresar.hide()
+                setDetalles(data)
+                mostrarTodos()
+            })
+            .catch((error) => console.log(error))
+
+    } else {
+
+        editar(data)
+            .then(data => {
+                modalIngresar.hide()
+                setDetalles(data)
+                mostrarTodos()
+            })
+            .catch((error) => console.log(error))
+    }
 }
 
 function renderFilas(data) {
@@ -118,6 +136,7 @@ function getFormData() {
 
 function setFormData(data) {
     modalIngresar.show()
+    modalIngresarEl.querySelector('.modal-title').textContent = 'Editar categoría'
     document.getElementById('id').value = data.id
     document.getElementById('nombre').value = data.nombre
     document.getElementById('descripcion').value = data.descripcion

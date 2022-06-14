@@ -8,8 +8,8 @@ async function agregar(data) {
     return response.json()
 }
 
-async function modificar(data) {
-    const url = `${categorias_url}/modificar`
+async function editar(data) {
+    const url = `${categorias_url}/editar`
 
     const response = await fetch(url, data)
     return response.json()

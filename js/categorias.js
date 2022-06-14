@@ -99,6 +99,9 @@ function renderFilas(data) {
     document.querySelectorAll('button.btn-delete').forEach((btn) => {
         btn.addEventListener('click', (e) => {
 
+            if (!confirm('¿Estas seguro(a)?'))
+                return false;
+
             const params = { id: btn.dataset.id }
             eliminar(params)
                 .then(data => mostrarTodos())

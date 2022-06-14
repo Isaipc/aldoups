@@ -2,12 +2,9 @@
 import { agregar, editar, cargar, eliminar, cargarTodos } from './categorias.operaciones'
 
 // @Componentes BS5 
-const modalOptions = {
-    keyboard: true
-}
 const modalIngresarEl = document.getElementById('modalIngresar')
-const modalIngresar = new bootstrap.Modal(modalIngresarEl, modalOptions)
-const modalDetalle = new bootstrap.Modal('#modalDetalle', modalOptions)
+const modalIngresar = new bootstrap.Modal(modalIngresarEl)
+const modalDetalle = new bootstrap.Modal('#modalDetalle')
 
 // Elementos necesarios
 const form = document.getElementById('form')
@@ -17,10 +14,13 @@ const categorias = document.getElementById('categorias')
 mostrarTodos()
 
 // @Eventos
+
 modalIngresarEl.addEventListener('show.bs.modal', event => {
     modalIngresarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
     form.reset()
 })
+
+modalIngresarEl.addEventListener('shown.bs.modal', () => document.getElementById('nombre').focus())
 
 form.addEventListener('submit', event => {
     event.preventDefault()

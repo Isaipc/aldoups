@@ -11,7 +11,7 @@ async function agregar(data) {
 async function editar(data) {
     const url = `${categorias_url}/editar`
 
-    const response = await fetch(url, data)
+    const response = await post(url, data)
     return response.json()
 }
 

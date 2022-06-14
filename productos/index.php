@@ -15,13 +15,9 @@
     <div class="container p-2">
         <h2>Productos</h2>
         <!-- Agregar -->
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngresar">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalGuardar">
             <i class="bi bi-plus"></i>
             Nuevo
-        </button>
-        <!-- Eliminar -->
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-            Eliminar
         </button>
 
         <!-- Tabla de visualizacion de datos -->
@@ -36,13 +32,14 @@
                         <th>Categoria</th>
                         <th>Fecha de ingreso</th>
                         <th>Fecha de modificacion</th>
+                        <th>Acciones</th>
                     </thead>
                     <tbody id="productos"></tbody>
                 </table>
             </div>
         </div>
 
-        <div class="modal fade" id="modalIngresar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -81,31 +78,6 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button class="btn btn-success btn-rounded" type="submit">Guardar</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Eliminar elemento</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="#" method="post" onsubmit="return validaE(this);">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 md-form">
-                                    <input type="text" name="Enombre" id="Ename" class="text-uppercase form-control">
-                                    <label for="Ename">Nombre</label>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
                     </form>
                 </div>

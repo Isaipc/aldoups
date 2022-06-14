@@ -30,6 +30,7 @@ try {
                 productos.precio,
                 productos.stock,
                 productos.descripcion,
+                categorias.id AS categoria_id,
                 categorias.nombre AS categoria,
                 productos.fecha_ingreso,
                 productos.fecha_modificacion

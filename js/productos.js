@@ -150,13 +150,14 @@ function showDetalleModal(data) {
 }
 
 function setFormData(data) {
+    console.log(data)
     modalGuardar.show()
     modalGuardarEl.querySelector('.modal-title').textContent = 'Editar producto'
     document.getElementById('id').value = data.id
     document.getElementById('nombre').value = data.nombre
     document.getElementById('precio').value = data.precio
     document.getElementById('stock').value = data.stock
-    document.getElementById('categoria').value = data.categoria
+    document.getElementById('categoria').value = data.categoria_id
     document.getElementById('descripcion').value = data.descripcion
 }
 

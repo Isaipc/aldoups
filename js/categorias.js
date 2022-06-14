@@ -1,65 +1,46 @@
 // @Imports 
 import { categorias_url } from './common'
+import { agregar, modificar, cargar, eliminar, cargarTodos } from './categorias.operaciones'
 
 // @Componentes BS5 
 const modalOptions = {
     keyboard: true
 }
-const modalIngresar = new bootstrap.Modal('#modalIngresar', modalOptions)
+const modalIngresarEl = document.getElementById('modalIngresar')
+const modalIngresar = new bootstrap.Modal(modalIngresarEl, modalOptions)
 const modalDetalle = new bootstrap.Modal('#modalDetalle', modalOptions)
 
 // Elementos necesarios
 const form = document.getElementById('form')
 const categorias = document.getElementById('categorias')
 
-
 // Ejecutar funciones al cargar la pagina:
-cargarTodos()
+mostrarTodos()
 
 // @Eventos
-form.addEventListener('submit', function (e) {
-    e.preventDefault()
+modalIngresarEl.addEventListener('show.bs.modal', event => form.reset())
 
-    const url = `${categorias_url}/agregar`
-    const data = {
-        nombre: document.getElementById('nombre').value,
-        descripcion: document.getElementById('descripcion').value,
-    }
+form.addEventListener('submit', event => {
+    event.preventDefault()
 
     if (!validaciones())
         return false;
 
-    agregar(url, data)
+    agregar(getFormData())
         .then(data => {
             modalIngresar.hide()
-            modalDetalle.show()
 
-            showDetalleModal(data)
-            cargarTodos()
+            form.reset()
+            setDetalles(data)
+            mostrarTodos()
         })
         .catch((error) => console.log(error))
+
 })
 
-
 // @Funciones
-async function agregar(url, data) {
-
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
-    return response.json()
-}
-
-function cargarTodos() {
-    const url = `${categorias_url}/list`
-
-    fetch(url, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-    })
-        .then(response => response.json())
+function mostrarTodos() {
+    cargarTodos()
         .then(data => renderFilas(data))
         .catch(error => console.log(error))
 }
@@ -70,21 +51,76 @@ function renderFilas(data) {
 
         return `<tr>` +
             `<td> ${index + 1} </td>` +
-            `<td> ${d.nombre} </td>` +
+            `<td> <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.nombre}</a></td>` +
             `<td> ${d.descripcion} </td>` +
             `<td> ${d.fecha_ingreso} </td>` +
             `<td> ${d.fecha_modificacion}</td>` +
+            `<td>
+                <button class="btn btn-danger btn-sm me-1 btn-delete" data-id="${d.id}">
+                    <i class="bi bi-x"></i>
+                </button>
+                <button class="btn btn-primary btn-sm btn-edit" data-id="${d.id}">
+                    <i class="bi bi-pencil-fill"></i>
+                </button>
+            </td>` +
             `</tr >`
     })
 
     categorias.innerHTML = rows.join('')
+
+    document.querySelectorAll('a.btn-show').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+
+            const params = { id: btn.dataset.id }
+            cargar(params)
+                .then(data => setDetalles(data))
+                .catch(error => console.log(error))
+        })
+    })
+
+    document.querySelectorAll('button.btn-delete').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+
+            const params = { id: btn.dataset.id }
+            eliminar(params)
+                .then(data => mostrarTodos())
+                .catch(error => console.log(error))
+        })
+    })
+
+    document.querySelectorAll('button.btn-edit').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+
+            const params = { id: btn.dataset.id }
+            cargar(params)
+                .then(data => setFormData(data))
+                .catch(error => console.log(error))
+        })
+    })
 }
 
-function showDetalleModal(data) {
+function setDetalles(data) {
+    modalDetalle.show()
+    document.getElementById('_id').textContent = data.id
     document.getElementById('_nombre').textContent = data.nombre
     document.getElementById('_descripcion').textContent = data.descripcion
     document.getElementById('_fecha_ingreso').textContent = data.fecha_ingreso
     document.getElementById('_fecha_modificacion').textContent = data.fecha_modificacion
+}
+
+function getFormData() {
+    return {
+        id: document.getElementById('id').value,
+        nombre: document.getElementById('nombre').value,
+        descripcion: document.getElementById('descripcion').value,
+    }
+}
+
+function setFormData(data) {
+    modalIngresar.show()
+    document.getElementById('id').value = data.id
+    document.getElementById('nombre').value = data.nombre
+    document.getElementById('descripcion').value = data.descripcion
 }
 
 function validaciones() {

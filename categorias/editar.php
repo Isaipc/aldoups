@@ -2,24 +2,31 @@
 
 include '../database/conexion.php';
 
-if(count($_POST) == 0 || !isset($_POST['id']))
+$json = file_get_contents("php://input");
+$data = json_decode($json);
+
+if ($data == null)
     die(http_response_code(400));
 
 try {
     $sql = $conn->prepare(
         'UPDATE categorias SET
             nombre = :nombre,
-            descripcion = :descripcion,
-        WHERE id = :id');
+            descripcion = :descripcion
+        WHERE id = :id'
+    );
 
-    $sql->bindParam(':id', $_POST['id']);
-    $sql->bindParam(':nombre', $_POST['nombre']);
-    $sql->bindParam(':descripcion', $_POST['descripcion']);
+    $sql->bindParam(':id', $data->id);
+    $sql->bindParam(':nombre', $data->nombre);
+    $sql->bindParam(':descripcion', $data->descripcion);
     $sql->execute();
-    
-    echo $sql->rowCount() > 0  ?
-        http_response_code(202) :  http_response_code(200);
-        
-}catch(PDOException $e){
+
+    $sql = $conn->prepare('SELECT * FROM categorias WHERE id=?');
+    $sql->execute([$data->id]);
+    $json = json_encode($sql->fetchObject());
+
+    echo $json;
+
+} catch (PDOException $e) {
     die('ERROR : ' . $e->getMessage());
 }

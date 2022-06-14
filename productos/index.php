@@ -39,18 +39,18 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nueva producto</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body px-5">
-                        <!-- creacion de formulario -->
-                        <form id="form" method="post">
+        <form id="form" method="post">
+            <div class="modal fade" id="modalGuardar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Nueva producto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body px-5">
+                            <!-- creacion de formulario -->
                             <div class="row">
-                                <input type="hidden" name="id" id="id">
+                                <input id="id" name="id" type="number" class="d-none">
                                 <div class="row mb-3">
                                     <input id="nombre" name="nombre" type="text" class="form-control">
                                     <label for="nombre">Nombre</label>
@@ -74,21 +74,21 @@
                                     <label for="category">categoria</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-success btn-rounded" type="submit">Guardar</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button class="btn btn-success btn-rounded" type="submit">Guardar</button>
-                    </div>
-                    </form>
                 </div>
             </div>
-        </div>
+        </form>
 
         <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modelTitledIs" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal tittle text-white font-weight-bold">Detalle del producto</h5>
+                        <h5 class="modal-title">Detalle del producto</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -122,6 +122,9 @@
                                 <label id="_fecha_modificacion" class="col-6">[fecha]</label>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>

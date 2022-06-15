@@ -4,11 +4,15 @@ import { agregar, editar, cargar, eliminar, cargarTodos } from './servicios/cate
 // @Componentes BS5 
 const modalGuardarEl = document.getElementById('modalGuardar')
 const modalGuardar = new bootstrap.Modal(modalGuardarEl)
-const modalDetalle = new bootstrap.Modal('#modalDetalle')
+
+const modalDetalleEl = document.getElementById('modalDetalle')
+const modalDetalle = new bootstrap.Modal(modalDetalleEl)
 
 // Elementos necesarios
 const form = document.getElementById('form')
-const categorias = document.getElementById('categorias')
+const _id = document.getElementById('id')
+const _nombre = document.getElementById('nombre')
+const _descripcion = document.getElementById('descripcion')
 
 // Ejecutar funciones al cargar la pagina:
 mostrarTodos()
@@ -38,14 +42,43 @@ function mostrarTodos() {
         .catch(error => console.log(error))
 }
 
+function mostrarElemento(id) {
+
+    const data = { id: id }
+
+    cargar(data)
+        .then(data => showModalDetalles(data))
+        .catch(error => console.log(error))
+}
+
+function editarElemento(id) {
+
+    const data = { id: id }
+
+    cargar(data)
+        .then(data => showModalEditar(data))
+        .catch(error => console.log(error))
+}
+
+function eliminarElemento(id) {
+
+    if (!confirm('¿Estas seguro(a)?'))
+        return false;
+
+    const data = { id: id }
+
+    eliminar(data)
+        .then(data => mostrarTodos())
+        .catch(error => console.log(error))
+}
+
 function guardar(data) {
 
     if (data.id === '') {
 
         agregar(data)
             .then(data => {
-                modalGuardar.hide()
-                setDetallesModal(data)
+                showModalDetalles(data)
                 mostrarTodos()
             })
             .catch((error) => console.log(error))
@@ -54,8 +87,7 @@ function guardar(data) {
 
         editar(data)
             .then(data => {
-                modalGuardar.hide()
-                setDetallesModal(data)
+                showModalDetalles(data)
                 mostrarTodos()
             })
             .catch((error) => console.log(error))
@@ -64,8 +96,7 @@ function guardar(data) {
 
 function renderFilas(data) {
 
-    const rows = data.map((d, index) => {
-
+    const filas = data.map((d, index) => {
         return `<tr>` +
             `<td> ${index + 1} </td>` +
             `<td> <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.nombre}</a></td>` +
@@ -83,65 +114,46 @@ function renderFilas(data) {
             `</tr >`
     })
 
-    categorias.innerHTML = rows.join('')
+    document.getElementById('categorias').innerHTML = filas.join('')
 
-    document.querySelectorAll('a.btn-show').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-
-            const params = { id: btn.dataset.id }
-            cargar(params)
-                .then(data => setDetallesModal(data))
-                .catch(error => console.log(error))
-        })
+    document.querySelectorAll('.btn-show').forEach((btn) => {
+        btn.addEventListener('click', event => mostrarElemento(btn.dataset.id))
     })
 
-    document.querySelectorAll('button.btn-delete').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-
-            if (!confirm('¿Estas seguro(a)?'))
-                return false;
-
-            const params = { id: btn.dataset.id }
-            eliminar(params)
-                .then(data => mostrarTodos())
-                .catch(error => console.log(error))
-        })
+    document.querySelectorAll('.btn-delete').forEach((btn) => {
+        btn.addEventListener('click', event => eliminarElemento(btn.dataset.id))
     })
 
-    document.querySelectorAll('button.btn-edit').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-
-            const params = { id: btn.dataset.id }
-            cargar(params)
-                .then(data => setFormData(data))
-                .catch(error => console.log(error))
-        })
+    document.querySelectorAll('.btn-edit').forEach((btn) => {
+        btn.addEventListener('click', event => editarElemento(btn.dataset.id))
     })
-}
-
-function setDetallesModal(data) {
-    modalDetalle.show()
-    document.getElementById('_id').textContent = data.id
-    document.getElementById('_nombre').textContent = data.nombre
-    document.getElementById('_descripcion').textContent = data.descripcion
-    document.getElementById('_fecha_ingreso').textContent = data.fecha_ingreso
-    document.getElementById('_fecha_modificacion').textContent = data.fecha_modificacion
 }
 
 function getFormData() {
     return {
-        id: document.getElementById('id').value,
-        nombre: document.getElementById('nombre').value,
-        descripcion: document.getElementById('descripcion').value,
+        id: _id.value,
+        nombre: _nombre.value,
+        descripcion: _descripcion.value,
     }
 }
 
-function setFormData(data) {
+function showModalEditar(data) {
     modalGuardar.show()
     modalGuardarEl.querySelector('.modal-title').textContent = 'Editar categoría'
-    document.getElementById('id').value = data.id
-    document.getElementById('nombre').value = data.nombre
-    document.getElementById('descripcion').value = data.descripcion
+
+    _id.value = data.id
+    _nombre.value = data.nombre
+    _descripcion.value = data.descripcion
+}
+
+function showModalDetalles(data) {
+    modalGuardar.hide()
+    modalDetalle.show()
+    modalDetalleEl.querySelector('.id').textContent = data.id
+    modalDetalleEl.querySelector('.nombre').textContent = data.nombre
+    modalDetalleEl.querySelector('.descripcion').textContent = data.descripcion
+    modalDetalleEl.querySelector('.fecha_ingreso').textContent = data.fecha_ingreso
+    modalDetalleEl.querySelector('.fecha_modificacion').textContent = data.fecha_modificacion
 }
 
 function validaciones() {

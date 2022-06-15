@@ -96,8 +96,11 @@ function guardar(data) {
 
 function renderFilas(data) {
 
-    const filas = data.map((d, index) => {
-        return `<tr>` +
+    document.getElementById('categorias').innerHTML = ''
+
+    data.forEach((d, index) => {
+        let fila =
+            `<tr>` +
             `<td> ${index + 1} </td>` +
             `<td> <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.nombre}</a></td>` +
             `<td> ${d.descripcion} </td>` +
@@ -111,10 +114,10 @@ function renderFilas(data) {
                     <i class="bi bi-pencil-fill"></i>
                 </button>
             </td>` +
-            `</tr >`
-    })
+            `</tr>`
 
-    document.getElementById('categorias').innerHTML = filas.join('')
+        document.getElementById('categorias').insertAdjacentHTML('afterbegin', fila)
+    })
 
     document.querySelectorAll('.btn-show').forEach((btn) => {
         btn.addEventListener('click', event => mostrarElemento(btn.dataset.id))

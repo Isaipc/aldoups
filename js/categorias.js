@@ -45,7 +45,7 @@ function guardar(data) {
         agregar(data)
             .then(data => {
                 modalGuardar.hide()
-                setDetalles(data)
+                setDetallesModal(data)
                 mostrarTodos()
             })
             .catch((error) => console.log(error))
@@ -55,7 +55,7 @@ function guardar(data) {
         editar(data)
             .then(data => {
                 modalGuardar.hide()
-                setDetalles(data)
+                setDetallesModal(data)
                 mostrarTodos()
             })
             .catch((error) => console.log(error))
@@ -90,7 +90,7 @@ function renderFilas(data) {
 
             const params = { id: btn.dataset.id }
             cargar(params)
-                .then(data => setDetalles(data))
+                .then(data => setDetallesModal(data))
                 .catch(error => console.log(error))
         })
     })
@@ -119,7 +119,7 @@ function renderFilas(data) {
     })
 }
 
-function setDetalles(data) {
+function setDetallesModal(data) {
     modalDetalle.show()
     document.getElementById('_id').textContent = data.id
     document.getElementById('_nombre').textContent = data.nombre

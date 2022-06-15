@@ -17,24 +17,6 @@ const _descripcion = document.getElementById('descripcion')
 // Ejecutar funciones al cargar la pagina:
 mostrarTodos()
 
-// @Eventos
-modalGuardarEl.addEventListener('show.bs.modal', () => {
-    modalGuardarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
-})
-
-modalGuardarEl.addEventListener('shown.bs.modal', () => document.getElementById('nombre').focus())
-modalGuardarEl.addEventListener('hidden.bs.modal', () => form.reset())
-
-form.addEventListener('submit', event => {
-    event.preventDefault()
-
-    if (!validaciones())
-        return false;
-
-    const data = getFormData()
-    guardar(data)
-})
-
 // @Funciones
 function mostrarTodos() {
     cargarTodos()
@@ -72,64 +54,22 @@ function eliminarElemento(id) {
         .catch(error => console.log(error))
 }
 
-function guardar(data) {
+function guardarElemento(data) {
 
-    if (data.id === '') {
-
+    if (data.id === '')
         agregar(data)
             .then(data => {
                 showModalDetalles(data)
                 mostrarTodos()
             })
             .catch((error) => console.log(error))
-
-    } else {
-
+    else
         editar(data)
             .then(data => {
                 showModalDetalles(data)
                 mostrarTodos()
             })
             .catch((error) => console.log(error))
-    }
-}
-
-function renderFilas(data) {
-
-    document.getElementById('categorias').innerHTML = ''
-
-    data.forEach((d, index) => {
-        let fila =
-            `<tr>` +
-            `<td> ${index + 1} </td>` +
-            `<td> <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.nombre}</a></td>` +
-            `<td> ${d.descripcion} </td>` +
-            `<td> ${d.fecha_ingreso} </td>` +
-            `<td> ${d.fecha_modificacion}</td>` +
-            `<td>
-                <button class="btn btn-danger btn-sm me-1 btn-delete" data-id="${d.id}">
-                    <i class="bi bi-x"></i>
-                </button>
-                <button class="btn btn-primary btn-sm btn-edit" data-id="${d.id}">
-                    <i class="bi bi-pencil-fill"></i>
-                </button>
-            </td>` +
-            `</tr>`
-
-        document.getElementById('categorias').insertAdjacentHTML('afterbegin', fila)
-    })
-
-    document.querySelectorAll('.btn-show').forEach((btn) => {
-        btn.addEventListener('click', event => mostrarElemento(btn.dataset.id))
-    })
-
-    document.querySelectorAll('.btn-delete').forEach((btn) => {
-        btn.addEventListener('click', event => eliminarElemento(btn.dataset.id))
-    })
-
-    document.querySelectorAll('.btn-edit').forEach((btn) => {
-        btn.addEventListener('click', event => editarElemento(btn.dataset.id))
-    })
 }
 
 function getFormData() {
@@ -162,3 +102,60 @@ function showModalDetalles(data) {
 function validaciones() {
     return true;
 }
+
+function renderFilas(data) {
+
+    document.getElementById('categorias').innerHTML = ''
+
+    data.forEach((d, index) => {
+        const fila =
+            `<tr>` +
+            `<td> ${index + 1} </td>` +
+            `<td> <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.nombre}</a></td>` +
+            `<td> ${d.descripcion} </td>` +
+            `<td> ${d.fecha_ingreso} </td>` +
+            `<td> ${d.fecha_modificacion}</td>` +
+            `<td>
+                <button class="btn btn-danger btn-sm me-1 btn-delete" data-id="${d.id}">
+                    <i class="bi bi-x"></i>
+                </button>
+                <button class="btn btn-primary btn-sm btn-edit" data-id="${d.id}">
+                    <i class="bi bi-pencil-fill"></i>
+                </button>
+            </td>` +
+            `</tr>`
+
+        document.getElementById('categorias').insertAdjacentHTML('beforeend', fila)
+    })
+
+    document.querySelectorAll('.btn-show').forEach((btn) => {
+        btn.addEventListener('click', event => mostrarElemento(btn.dataset.id))
+    })
+
+    document.querySelectorAll('.btn-delete').forEach((btn) => {
+        btn.addEventListener('click', event => eliminarElemento(btn.dataset.id))
+    })
+
+    document.querySelectorAll('.btn-edit').forEach((btn) => {
+        btn.addEventListener('click', event => editarElemento(btn.dataset.id))
+    })
+}
+
+// @Eventos
+modalGuardarEl.addEventListener('show.bs.modal', () => {
+    modalGuardarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
+})
+
+modalGuardarEl.addEventListener('shown.bs.modal', () => _nombre.focus())
+modalGuardarEl.addEventListener('hidden.bs.modal', () => form.reset())
+
+
+form.addEventListener('submit', event => {
+    event.preventDefault()
+
+    if (!validaciones())
+        return false;
+
+    const data = getFormData()
+    guardarElemento(data)
+})

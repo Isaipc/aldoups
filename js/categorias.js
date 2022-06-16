@@ -1,5 +1,6 @@
 // @Imports 
 import { agregar, editar, cargar, eliminar, cargarTodos } from './servicios/categorias.operaciones'
+import { estaVacio } from './validaciones'
 
 // @Componentes BS5 
 const modalGuardarEl = document.getElementById('modalGuardar')
@@ -9,6 +10,7 @@ const modalDetalleEl = document.getElementById('modalDetalle')
 const modalDetalle = new bootstrap.Modal(modalDetalleEl)
 
 // Elementos necesarios
+const _errores = document.getElementById('errores')
 const form = document.getElementById('form')
 const _id = document.getElementById('id')
 const _nombre = document.getElementById('nombre')
@@ -100,7 +102,26 @@ function showModalDetalles(data) {
 }
 
 function validaciones() {
-    return true;
+
+    let valid = true
+    let errores = []
+
+    if (estaVacio(_nombre.value)) {
+        errores.push(`Debe llenar el campo 'nombre'`)
+        _nombre.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_descripcion.value)) {
+        errores.push(`Debe llenar el campo 'descripcion'`)
+        _descripcion.classList.add('is-invalid')
+        valid = false
+    }
+
+    _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
+    modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
+
+    return valid
 }
 
 function renderFilas(data) {
@@ -144,6 +165,9 @@ function renderFilas(data) {
 // @Eventos
 modalGuardarEl.addEventListener('show.bs.modal', () => {
     modalGuardarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
+    modalGuardarEl.querySelector('.modal-error').classList.add('d-none')
+    _nombre.classList.remove('is-invalid')
+    _descripcion.classList.remove('is-invalid')
 })
 
 modalGuardarEl.addEventListener('shown.bs.modal', () => _nombre.focus())
@@ -158,4 +182,12 @@ form.addEventListener('submit', event => {
 
     const data = getFormData()
     guardarElemento(data)
+})
+
+_nombre.addEventListener('keydown', () => {
+    _nombre.classList.remove('is-invalid')
+})
+
+_descripcion.addEventListener('keydown', () => {
+    _descripcion.classList.remove('is-invalid')
 })

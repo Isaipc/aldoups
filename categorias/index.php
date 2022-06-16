@@ -45,6 +45,10 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body px-5">
+                            <!-- Lista de errores -->
+                            <div class="alert alert-danger modal-error" role="alert">
+                                <ul id="errores"></ul>
+                            </div>
                             <!-- creacion de formulario -->
                             <input id="id" name="id" type="number" class="d-none">
                             <div class="row mb-2">
@@ -76,23 +80,23 @@
                     <div class="modal-body">
                         <div class="row mb-1">
                             <span class="col-6"> ID: </span>
-                            <label class="id col-6" >[ID]</label>
+                            <label class="id col-6">[ID]</label>
                         </div>
                         <div class="row mb-1">
                             <span class="col-6"> Nombre: </span>
-                            <label class="nombre col-6" >[nombre]</label>
+                            <label class="nombre col-6">[nombre]</label>
                         </div>
                         <div class="row mb-1">
                             <span class="col-6" class="col"> Descripcion: </span>
-                            <label class="descripcion col-6" >[descripcion]</label>
+                            <label class="descripcion col-6">[descripcion]</label>
                         </div>
                         <div class="row mb-1">
                             <span class="col-6"> Fecha de igreso: </span>
-                            <label class="fecha_ingreso col-6" >[fecha]</label>
+                            <label class="fecha_ingreso col-6">[fecha]</label>
                         </div>
                         <div class="row mb-1">
                             <span class="col-6"> Fecha de modifiacion: </span>
-                            <label class="fecha_modificacion col-6" >[fecha]</label>
+                            <label class="fecha_modificacion col-6">[fecha]</label>
                         </div>
                     </div>
                     <div class="modal-footer">

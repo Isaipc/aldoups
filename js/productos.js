@@ -78,13 +78,13 @@ function setFormData(data) {
 function showDetalleModal(data) {
     modalGuardar.hide()
     modalDetalle.show()
-    document.getElementById('_nombre').textContent = data.nombre
-    document.getElementById('_stock').textContent = data.stock
-    document.getElementById('_precio').textContent = data.precio
-    document.getElementById('_categoria').textContent = data.categoria
-    document.getElementById('_descripcion').textContent = data.descripcion
-    document.getElementById('_fecha_ingreso').textContent = data.fecha_ingreso
-    document.getElementById('_fecha_modificacion').textContent = data.fecha_modificacion
+    document.querySelector('.nombre').textContent = data.nombre
+    document.querySelector('.stock').textContent = data.stock
+    document.querySelector('.precio').textContent = data.precio
+    document.querySelector('.categoria').textContent = data.categoria
+    document.querySelector('.descripcion').textContent = data.descripcion
+    document.querySelector('.fecha_ingreso').textContent = data.fecha_ingreso
+    document.querySelector('.fecha_modificacion').textContent = data.fecha_modificacion
 }
 
 function validaciones() {

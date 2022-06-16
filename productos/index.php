@@ -95,31 +95,31 @@
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <span class="col-6">Nombre</span>
-                                <label id="_nombre" class="col-6">[nombre]</label>
+                                <label class="nombre col-6">[nombre]</label>
                             </div>
                             <div class="row mb-2">
                                 <span class="col-6">Precio</span>
-                                <label id="_precio" class="col-6">[precio]</label>
+                                <label class="precio col-6">[precio]</label>
                             </div>
                             <div class="row mb-2">
                                 <span class="col-6">Stock</span>
-                                <label id="_stock" class="col-6">[stock]</label>
+                                <label class="stock col-6">[stock]</label>
                             </div>
                             <div class="row mb-2">
                                 <span class="col-6">Descripcion del producto</span>
-                                <label id="_descripcion" class="col-6">[descripcion]</label>
+                                <label class="descripcion col-6">[descripcion]</label>
                             </div>
                             <div class="row mb-2">
                                 <span class="col-6">Categoria</span>
-                                <label id="_categoria" class="col-6">[categoria]</label>
+                                <label class="categoria col-6">[categoria]</label>
                             </div>
                             <div class="row mb-2">
                                 <span class="col-6">Fecha de ingreso</span>
-                                <label id="_fecha_ingreso" class="col-6">[fecha]</label>
+                                <label class="fecha_ingreso col-6">[fecha]</label>
                             </div>
                             <div class="row mb-2">
                                 <span class="col-6">Fecha de modificacion</span>
-                                <label id="_fecha_modificacion" class="col-6">[fecha]</label>
+                                <label class="fecha_modificacion col-6">[fecha]</label>
                             </div>
                         </div>
                     </div>

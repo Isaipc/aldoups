@@ -48,6 +48,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body px-5">
+                            <!-- Lista de errores -->
+                            <div class="alert alert-danger modal-error" role="alert">
+                                <ul id="errores"></ul>
+                            </div>
+
                             <!-- creacion de formulario -->
                             <div class="row">
                                 <input id="id" name="id" type="number" class="d-none">
@@ -69,7 +74,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <select id="categoria" name="categoria" class="form-select" aria-label="Default select example">
-                                        <option>--SELECCIONA UNA CATEGORIA--</option>
+                                        <option value="">--SELECCIONA UNA CATEGORIA--</option>
                                     </select>
                                     <label for="category">categoria</label>
                                 </div>

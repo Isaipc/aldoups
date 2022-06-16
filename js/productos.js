@@ -1,6 +1,7 @@
 // @Import 
 import { agregar, editar, cargar, eliminar, cargarTodos } from './servicios/productos.operaciones'
 import { cargarTodos as cargarCategorias } from './servicios/categorias.operaciones'
+import { estaVacio, esNumeroPositivo } from './validaciones'
 
 // @Componentes BS5 
 const modalGuardarEl = document.getElementById('modalGuardar')
@@ -10,6 +11,7 @@ const modalDetalle = new bootstrap.Modal('#modalDetalle')
 // Elementos necesarios
 const _form = document.getElementById('form')
 const _productos = document.getElementById('productos')
+const _errores = document.getElementById('errores')
 const _id = document.getElementById('id')
 const _nombre = document.getElementById('nombre')
 const _precio = document.getElementById('precio')
@@ -66,7 +68,7 @@ function getFormData() {
 function setFormData(data) {
     modalGuardar.show()
     modalGuardarEl.querySelector('.modal-title').textContent = 'Editar producto'
-    
+
     _id.value = data.id
     _nombre.value = data.nombre
     _precio.value = data.precio
@@ -88,7 +90,56 @@ function showDetalleModal(data) {
 }
 
 function validaciones() {
-    return true;
+
+    let valid = true
+    let errores = []
+
+    if (estaVacio(_nombre.value)) {
+        errores.push(`Debe llenar el campo 'nombre'`)
+        _nombre.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_stock.value)) {
+        errores.push(`Debe llenar el campo 'stock'`)
+        _stock.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (!esNumeroPositivo(_stock.value)) {
+        errores.push(`El campo 'stock' solo puede tener valor numerico positivo`)
+        _stock.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_precio.value)) {
+        errores.push(`Debe llenar el campo 'precio'`)
+        _precio.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (!esNumeroPositivo(_precio.value)) {
+        errores.push(`El campo 'precio' solo puede tener valor numerico positivo`)
+        _precio.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_descripcion.value)) {
+        errores.push(`Debe llenar el campo 'descripcion'`)
+        _descripcion.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_categoria.value)) {
+        errores.push(`Debe seleccionar 'categoria'`)
+        _categoria.classList.add('is-invalid')
+        valid = false
+    }
+
+    _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
+    modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
+
+    return valid
 }
 
 function renderFilas(data) {
@@ -164,6 +215,7 @@ function renderCategoriasOptions(data) {
 // @Eventos
 modalGuardarEl.addEventListener('show.bs.modal', () => {
     modalGuardarEl.querySelector('.modal-title').textContent = 'Nuevo producto'
+    modalGuardarEl.querySelector('.modal-error').classList.add('d-none')
 })
 
 modalGuardarEl.addEventListener('shown.bs.modal', () => document.getElementById('nombre').focus())
@@ -178,3 +230,9 @@ _form.addEventListener('submit', event => {
     const data = getFormData()
     guardarProducto(data)
 })
+
+_nombre.addEventListener('keydown', () => _nombre.classList.remove('is-invalid'))
+_precio.addEventListener('keydown', () => _precio.classList.remove('is-invalid'))
+_stock.addEventListener('keydown', () => _stock.classList.remove('is-invalid'))
+_descripcion.addEventListener('keydown', () => _descripcion.classList.remove('is-invalid'))
+_categoria.addEventListener('change', () => _categoria.classList.remove('is-invalid'))

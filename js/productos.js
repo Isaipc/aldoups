@@ -8,31 +8,18 @@ const modalGuardar = new bootstrap.Modal(modalGuardarEl)
 const modalDetalle = new bootstrap.Modal('#modalDetalle')
 
 // Elementos necesarios
-const form = document.getElementById('form')
-const productos = document.getElementById('productos')
-
+const _form = document.getElementById('form')
+const _productos = document.getElementById('productos')
+const _id = document.getElementById('id')
+const _nombre = document.getElementById('nombre')
+const _precio = document.getElementById('precio')
+const _stock = document.getElementById('stock')
+const _descripcion = document.getElementById('descripcion')
+const _categoria = document.getElementById('categoria')
 
 // Ejecutar funciones al cargar la pagina:
 mostrarProductos()
 mostrarCategorias()
-
-// @Eventos
-modalGuardarEl.addEventListener('show.bs.modal', () => {
-    modalGuardarEl.querySelector('.modal-title').textContent = 'Nuevo producto'
-})
-
-modalGuardarEl.addEventListener('shown.bs.modal', () => document.getElementById('nombre').focus())
-modalGuardarEl.addEventListener('hidden.bs.modal', () => form.reset())
-
-form.addEventListener('submit', event => {
-    event.preventDefault()
-
-    if (!validaciones())
-        return false;
-
-    const data = getFormData()
-    guardarProducto(data)
-})
 
 // @Funciones
 function mostrarProductos() {
@@ -51,7 +38,6 @@ function guardarProducto(data) {
     if (data.id == '') {
         agregar(data)
             .then(data => {
-                modalGuardar.hide()
                 showDetalleModal(data)
                 mostrarProductos()
             })
@@ -59,13 +45,50 @@ function guardarProducto(data) {
     } else {
         editar(data)
             .then(data => {
-                modalGuardar.hide()
                 showDetalleModal(data)
                 mostrarProductos()
             })
             .catch((error) => console.log(error))
     }
+}
 
+function getFormData() {
+    return {
+        id: _id.value,
+        nombre: _nombre.value,
+        precio: _precio.value,
+        stock: _stock.value,
+        descripcion: _descripcion.value,
+        categoria_id: _categoria.value
+    }
+}
+
+function setFormData(data) {
+    modalGuardar.show()
+    modalGuardarEl.querySelector('.modal-title').textContent = 'Editar producto'
+    
+    _id.value = data.id
+    _nombre.value = data.nombre
+    _precio.value = data.precio
+    _stock.value = data.stock
+    _categoria.value = data.categoria_id
+    _descripcion.value = data.descripcion
+}
+
+function showDetalleModal(data) {
+    modalGuardar.hide()
+    modalDetalle.show()
+    document.getElementById('_nombre').textContent = data.nombre
+    document.getElementById('_stock').textContent = data.stock
+    document.getElementById('_precio').textContent = data.precio
+    document.getElementById('_categoria').textContent = data.categoria
+    document.getElementById('_descripcion').textContent = data.descripcion
+    document.getElementById('_fecha_ingreso').textContent = data.fecha_ingreso
+    document.getElementById('_fecha_modificacion').textContent = data.fecha_modificacion
+}
+
+function validaciones() {
+    return true;
 }
 
 function renderFilas(data) {
@@ -93,7 +116,7 @@ function renderFilas(data) {
             `</tr>`
     })
 
-    productos.innerHTML = rows.join('')
+    _productos.innerHTML = rows.join('')
 
     document.querySelectorAll('a.btn-show').forEach((btn) => {
         btn.addEventListener('click', (e) => {
@@ -138,40 +161,20 @@ function renderCategoriasOptions(data) {
     document.getElementById('categoria').innerHTML += options.join('')
 }
 
-function showDetalleModal(data) {
-    modalDetalle.show()
-    document.getElementById('_nombre').textContent = data.nombre
-    document.getElementById('_stock').textContent = data.stock
-    document.getElementById('_precio').textContent = data.precio
-    document.getElementById('_categoria').textContent = data.categoria
-    document.getElementById('_descripcion').textContent = data.descripcion
-    document.getElementById('_fecha_ingreso').textContent = data.fecha_ingreso
-    document.getElementById('_fecha_modificacion').textContent = data.fecha_modificacion
-}
+// @Eventos
+modalGuardarEl.addEventListener('show.bs.modal', () => {
+    modalGuardarEl.querySelector('.modal-title').textContent = 'Nuevo producto'
+})
 
-function setFormData(data) {
-    console.log(data)
-    modalGuardar.show()
-    modalGuardarEl.querySelector('.modal-title').textContent = 'Editar producto'
-    document.getElementById('id').value = data.id
-    document.getElementById('nombre').value = data.nombre
-    document.getElementById('precio').value = data.precio
-    document.getElementById('stock').value = data.stock
-    document.getElementById('categoria').value = data.categoria_id
-    document.getElementById('descripcion').value = data.descripcion
-}
+modalGuardarEl.addEventListener('shown.bs.modal', () => document.getElementById('nombre').focus())
+modalGuardarEl.addEventListener('hidden.bs.modal', () => _form.reset())
 
-function getFormData() {
-    return {
-        id: document.getElementById('id').value,
-        nombre: document.getElementById('nombre').value,
-        precio: document.getElementById('precio').value,
-        stock: document.getElementById('stock').value,
-        descripcion: document.getElementById('descripcion').value,
-        categoria_id: document.getElementById('categoria').value
-    }
-}
+_form.addEventListener('submit', event => {
+    event.preventDefault()
 
-function validaciones() {
-    return true;
-}
+    if (!validaciones())
+        return false;
+
+    const data = getFormData()
+    guardarProducto(data)
+})

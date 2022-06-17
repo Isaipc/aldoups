@@ -11,7 +11,7 @@
 <body>
     <?php include 'includes/navbar.php'; ?>
     <div class="container p-2">
-        <a href="" class="btn btn-primary">
+        <a href="/realizar-venta" class="btn btn-primary">
             <i class="bi bi-currency-dollar"></i>
             Realizar venta
         </a>

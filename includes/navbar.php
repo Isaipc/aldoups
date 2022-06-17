@@ -19,6 +19,11 @@
                         <i class="bi bi-box"></i> Productos
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ventas">
+                        <i class="bi bi-box"></i> Ventas
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Reportes

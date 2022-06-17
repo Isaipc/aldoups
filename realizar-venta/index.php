@@ -19,7 +19,9 @@
                 <form action="" id="form">
                     <div class="row mb-2">
                         <label for="producto">Producto</label>
-                        <input type="text" name="producto" id="producto" class="form-control">
+                        <select name="producto" id="producto" class="form-select">
+                            <option value="">--SELECCIONE UN PRODUCTO--</option>
+                        </select>
                     </div>
                     <div class="row mb-3">
                         <label for="cantidad">Cantidad</label>

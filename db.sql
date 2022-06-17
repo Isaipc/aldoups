@@ -59,7 +59,7 @@ CREATE TABLE producto_vendido(
     producto_id INT NOT NULL,
     venta_id INT NOT NULL,
     cantidad INT NOT NULL,
-    monto DOUBLE NOT NULL,
+    precio DOUBLE NOT NULL,
 
     PRIMARY KEY (id),
     INDEX (producto_id),

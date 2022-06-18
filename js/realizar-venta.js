@@ -16,7 +16,6 @@ const _total = document.getElementById('total')
 
 
 // Ejecutar funciones al cargar la pagina:
-document.body.querySelector('.error').classList.add('d-none')
 cargarProductosOptions()
 
 // @Funciones
@@ -31,7 +30,7 @@ function calcularTotal() {
 
 function agregarProducto(data) {
     productos.push(data)
-    
+
     _carrito.innerHTML +=
         `<tr>
             <td>${data.nombre}</td>
@@ -58,6 +57,12 @@ function validaciones() {
     if (estaVacio(_producto.value)) {
         errores.push(`Debe llenar el campo 'producto'`)
         _producto.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_cantidad.value)) {
+        errores.push(`Debe llenar el campo 'cantidad'`)
+        _cantidad.classList.add('is-invalid')
         valid = false
     }
 
@@ -100,3 +105,5 @@ _producto.addEventListener('change', () => {
         .catch(error => console.log(error))
 
 })
+
+_cantidad.addEventListener('keydown', () => _cantidad.classList.remove('is-invalid'))

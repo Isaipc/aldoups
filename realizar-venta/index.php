@@ -16,7 +16,7 @@
         <h2>Realizar venta</h2>
         <div class="row">
             <div class="col-lg-4 p-3">
-                <div class="alert alert-danger error">
+                <div class="alert alert-danger error d-none">
                     <ul id="errores"></ul>
                 </div>
                 <form action="" id="form">

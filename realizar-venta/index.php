@@ -39,32 +39,37 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button type="submit" class="btn btn-primary col-lg-6">
-                            Agregar
-                        </button>
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-plus"></i>Agregar
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="col p-3">
-                <table class="table table-md table-striped table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Monto</th>
-                        </tr>
-                    </thead>
-                    <tbody id="carrito"></tbody>
-                </table>
-                <div class="d-flex justify-content-end">
-                    <h4 class="me-4">Total</h4>
-                    <h4 id="total">0</h4>
+                <div class="row mb-3">
+                    <div class="col">
+                        <table class="table table-md table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody id="carrito"></tbody>
+                        </table>
+                        <div class="d-flex justify-content-end">
+                            <h4 class="me-4">Total</h4>
+                            <h4 id="total">0</h4>
+                        </div>
+                    </div>
                 </div>
-
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalGuardar">
-                    Guardar
-                </button>
+                <div class="row justify-content-end">
+                    <button class="btn btn-primary col-lg-4">Guardar</button>
+                </div>
             </div>
         </div>
     </div>

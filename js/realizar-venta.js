@@ -4,6 +4,7 @@ import { estaVacio } from './validaciones'
 
 // Variables
 let productos = []
+let currentProducto = {}
 
 // Elementos de la pagina
 const _carrito = document.getElementById('carrito')
@@ -25,27 +26,49 @@ function cargarProductosOptions() {
         .catch(error => console.log(error))
 }
 function calcularTotal() {
-    return productos.reduce((total, d) => parseFloat(d.precio) + parseFloat(total), 0);
+    return productos.reduce((total, d) => d.monto + total, 0);
 }
 
-function agregarProducto(data) {
-    productos.push(data)
+function agregarProducto() {
 
-    _carrito.innerHTML +=
-        `<tr>
-            <td>${data.nombre}</td>
-            <td>${data.precio}</td>
-            <td>${data.cantidad}</td>
-            <td class="text-end">${data.cantidad * data.precio}</td>
+    let data = currentProducto
+    data.monto = data.precio * data.cantidad
+    
+    const index = productos.findIndex(p => p.id == data.id)
+
+    if (index != -1) {
+
+        productos[index].cantidad += data.cantidad
+        productos[index].monto += data.cantidad * data.precio
+        data = productos[index]
+
+        const item = document.getElementById(`producto-${data.id}`)
+        item.querySelector('.cantidad').textContent = data.cantidad
+        item.querySelector('.monto').textContent = data.monto
+    }
+    else {
+        productos.push(data)
+
+        _carrito.innerHTML +=
+            `<tr id="producto-${data.id}">
+            <td class="nombre">${data.nombre}</td>
+            <td class="precio">${data.precio}</td>
+            <td class="cantidad">${data.cantidad}</td>
+            <td class="monto text-end">${data.monto}</td>
         </tr>`
+    }
 }
 
-function getProducto() {
-    return {
-        id: _producto.options[_producto.selectedIndex].value,
-        nombre: _producto.options[_producto.selectedIndex].text,
-        precio: _precio.value,
-        cantidad: _cantidad.value,
+function setCurrentProducto(data) {
+    _precio.value = data.precio
+
+    currentProducto = {
+        id: data.id,
+        nombre: data.nombre,
+        precio: parseFloat(data.precio),
+        stock: parseInt(data.stock),
+        cantidad: parseInt(_cantidad.value),
+        monto: 0
     }
 }
 
@@ -66,6 +89,12 @@ function validaciones() {
         valid = false
     }
 
+    if (currentProducto.cantidad > currentProducto.stock) {
+        errores.push(`No hay suficiente stock`)
+        _cantidad.classList.add('is-invalid')
+        valid = false
+    }
+
     _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
     document.body.querySelector('.error').classList.remove('d-none')
 
@@ -78,9 +107,8 @@ function renderProductosOptions(data) {
         return `<option value="${d.id}">${d.nombre}</option>`
     })
 
-    document.getElementById('producto').innerHTML += options.join('')
+    _producto.innerHTML += options.join('')
 }
-
 
 // @Eventos
 _form.addEventListener('submit', (event) => {
@@ -89,21 +117,26 @@ _form.addEventListener('submit', (event) => {
     if (!validaciones())
         return false
 
-    const data = getProducto()
-    agregarProducto(data)
-    _total.innerHTML = calcularTotal()
     document.body.querySelector('.error').classList.add('d-none')
+
+    agregarProducto()
+    _total.innerHTML = calcularTotal()
+    _form.reset()
 })
 
 _producto.addEventListener('change', () => {
 
     _producto.classList.remove('is-invalid')
+
     const data = { id: _producto.value }
 
     cargar(data)
-        .then(data => { _precio.value = data.precio })
+        .then(data => setCurrentProducto(data))
         .catch(error => console.log(error))
-
 })
 
-_cantidad.addEventListener('keydown', () => _cantidad.classList.remove('is-invalid'))
+_cantidad.addEventListener('keydown', () => {
+
+    _cantidad.classList.remove('is-invalid')
+    currentProducto.cantidad = parseInt(_cantidad.value)
+})

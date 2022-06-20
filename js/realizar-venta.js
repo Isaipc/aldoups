@@ -54,9 +54,9 @@ function agregarProducto() {
         _carrito.innerHTML +=
             `<tr id="producto-${data.id}">
             <td class="nombre">${data.nombre}</td>
-            <td class="precio">${data.precio}</td>
+            <td class="precio">$${data.precio}</td>
             <td class="cantidad">${data.cantidad}</td>
-            <td class="monto text-end">${data.monto}</td>
+            <td class="monto text-end">$${data.monto}</td>
         </tr>`
     }
 }

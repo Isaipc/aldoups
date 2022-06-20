@@ -151,7 +151,7 @@ function renderFilas(data) {
             `<td>
                 <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.nombre}</a>
              </td>` +
-            `<td> ${d.precio} </td>` +
+            `<td> $${d.precio}</td>` +
             `<td> ${d.stock} </td>` +
             `<td> ${d.categoria} </td>` +
             `<td> ${d.fecha_ingreso} </td>` +

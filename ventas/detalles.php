@@ -64,7 +64,7 @@
                 <div class="row mb-1">
                     <span class="col-2" class="col"> Total: </span>
                     <label class="descripcion col-6">
-                        $ <?= $venta->total ?> MXN
+                        $<?= $venta->total ?> MXN
                     </label>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                                 echo "<td>" . ($key + 1) . "</td>";
                                 echo "<td>$p->producto</td>";
                                 echo "<td>$p->cantidad</td>";
-                                echo "<td>$p->precio</td>";
+                                echo "<td>$$p->precio</td>";
                                 echo "</tr>";
                             } ?>
                         </tbody>

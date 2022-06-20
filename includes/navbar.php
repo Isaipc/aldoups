@@ -29,6 +29,15 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                        <i class="bi bi-box"></i> Cortes de caja 
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/realizar-venta">Realizar corte de caja</a></li>
+                        <li><a class="dropdown-item" href="/ventas">Consultar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Reportes
                     </a>

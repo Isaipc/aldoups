@@ -71,3 +71,15 @@ CREATE TABLE producto_vendido(
     FOREIGN KEY (venta_id)
         REFERENCES ventas(id)
 ) ENGINE=INNODB;
+
+CREATE TABLE cortes_de_caja(
+    id INT AUTO_INCREMENT,
+    efectivo_esperado DOUBLE NOT NULL,
+    efectivo_contado DOUBLE NOT NULL,
+    fecha_ingreso TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuario_id INT NOT NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (usuario_id)
+        REFERENCES usuarios(id)
+) ENGINE=INNODB;

@@ -1,4 +1,4 @@
-import { ventas_url as _url } from './common'
+import { ventas_url as _url } from './constants'
 import { get, post } from './requests'
 
 async function agregar(data) {

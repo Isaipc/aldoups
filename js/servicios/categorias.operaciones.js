@@ -1,4 +1,4 @@
-import { categorias_url } from './common'
+import { categorias_url } from './constants'
 import { get, post } from './requests'
 
 async function agregar(data) {

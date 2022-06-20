@@ -47,6 +47,7 @@ CREATE TABLE ventas(
     total DOUBLE NOT NULL,
     fecha_ingreso TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     usuario_id INT NOT NULL,
+    estado TINYINT NULL,
 
     PRIMARY KEY (id),
 

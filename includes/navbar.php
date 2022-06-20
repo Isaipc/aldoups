@@ -19,10 +19,14 @@
                         <i class="bi bi-box"></i> Productos
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/ventas">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" role="button">
                         <i class="bi bi-box"></i> Ventas
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/realizar-venta">Realizar venta</a></li>
+                        <li><a class="dropdown-item" href="/ventas">Consultar</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

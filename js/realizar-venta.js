@@ -1,5 +1,6 @@
 // @Imports 
 import { cargar, cargarTodos } from "./servicios/productos.operaciones";
+import { agregar } from "./servicios/ventas.operaciones"
 import { estaVacio } from './validaciones'
 
 // Variables
@@ -121,7 +122,7 @@ _form.addEventListener('submit', (event) => {
     document.body.querySelector('.error').classList.add('d-none')
 
     agregarProducto()
-    _total.innerHTML = calcularTotal()
+    _total.textContent = calcularTotal()
     _form.reset()
 })
 
@@ -143,5 +144,16 @@ _cantidad.addEventListener('change', () => {
 })
 
 _guardarBtn.addEventListener('click', event => {
-    console.log(productos)
+
+    if (!confirm('¿Desea registrar la venta?'))
+        return false;
+
+    agregar(productos)
+        .then(data => {
+            console.log(data)
+            _carrito.innerHTML = ''
+            _total.textContent = 0
+            alert('Venta realizada con exito ;)')
+        })
+        .catch((error) => console.log(error))
 })

@@ -30,16 +30,12 @@ function renderFilas(data) {
         const fila =
             `<tr>` +
             `<td> ${index + 1} </td>` +
-            `<td> <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.id}</a></td>` +
+            `<td> <a href="detalles/?id=${d.id}" class="text-decoration-none">${d.id}</a></td>` +
             `<td> ${d.total} </td>` +
             `<td> ${d.fecha_ingreso} </td>` +
             `<td> </td>` +
             `</tr>`
 
         ventas.insertAdjacentHTML('beforeend', fila)
-    })
-
-    document.querySelectorAll('.btn-show').forEach((btn) => {
-        btn.addEventListener('click', event => mostrarElemento(btn.dataset.id))
     })
 }

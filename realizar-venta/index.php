@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-end">
-                    <button class="btn btn-primary col-lg-4">Guardar</button>
+                    <button id="guardarVenta" class="btn btn-primary col-lg-4">Guardar</button>
                 </div>
             </div>
         </div>

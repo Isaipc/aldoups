@@ -7,6 +7,7 @@ let productos = []
 let currentProducto = {}
 
 // Elementos de la pagina
+const _guardarBtn = document.getElementById('guardarVenta')
 const _carrito = document.getElementById('carrito')
 const _form = document.getElementById('form')
 const _errores = document.getElementById('errores')
@@ -33,7 +34,7 @@ function agregarProducto() {
 
     let data = currentProducto
     data.monto = data.precio * data.cantidad
-    
+
     const index = productos.findIndex(p => p.id == data.id)
 
     if (index != -1) {
@@ -135,8 +136,12 @@ _producto.addEventListener('change', () => {
         .catch(error => console.log(error))
 })
 
-_cantidad.addEventListener('keydown', () => {
+_cantidad.addEventListener('change', () => {
 
     _cantidad.classList.remove('is-invalid')
     currentProducto.cantidad = parseInt(_cantidad.value)
+})
+
+_guardarBtn.addEventListener('click', event => {
+    console.log(productos)
 })

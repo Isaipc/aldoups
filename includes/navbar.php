@@ -25,7 +25,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/realizar-venta">Realizar venta</a></li>
-                        <li><a class="dropdown-item" href="/ventas">Consultar</a></li>
+                        <li><a class="dropdown-item" href="/ventas">Historial</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -34,7 +34,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/realizar-corte">Realizar corte de caja</a></li>
-                        <li><a class="dropdown-item" href="/cortes-de-caja">Consultar</a></li>
+                        <li><a class="dropdown-item" href="/cortes-de-caja">Historial</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

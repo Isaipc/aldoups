@@ -18,10 +18,9 @@
             <div class="card-body">
                 <table class="table table-responsive table-hover table-striped">
                     <thead>
-                        <th>#</th>
-                        <th>ID</th>
+                        <th>No. venta</th>
                         <th>Total</th>
-                        <th>Fecha de venta</th>
+                        <th>Fecha de ingreso</th>
                         <th>Acciones</th>
                     </thead>
                     <tbody id="items"></tbody>

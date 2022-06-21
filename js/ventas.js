@@ -29,7 +29,6 @@ function renderFilas(data) {
     data.forEach((d, index) => {
         const fila =
             `<tr>` +
-            `<td> ${index + 1} </td>` +
             `<td> <a href="detalles/?id=${d.id}" class="text-decoration-none">${d.id}</a></td>` +
             `<td> $${d.total}</td>` +
             `<td> ${d.fecha_ingreso} </td>` +

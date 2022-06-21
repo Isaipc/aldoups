@@ -153,7 +153,12 @@ _guardarBtn.addEventListener('click', event => {
             console.log(data)
             _carrito.innerHTML = ''
             _total.textContent = 0
+
             alert('Venta realizada con exito ;)')
+
+            setTimeout(function () {
+                window.location.href = `/ventas/detalles?id=${data.id}`;
+            }, 2000);
         })
         .catch((error) => console.log(error))
 })

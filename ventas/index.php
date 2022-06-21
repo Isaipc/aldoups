@@ -13,6 +13,7 @@
     <?php include '../includes/navbar.php' ?>
     <div class="container p-2">
         <h2>Historial de ventas</h2>
+        <a class="btn btn-primary" href="/realizar-venta">Registrar nueva venta</a>
         <!-- Tabla de visualizacion de datos -->
         <div class="card">
             <div class="card-body">

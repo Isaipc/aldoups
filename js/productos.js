@@ -80,6 +80,7 @@ function setFormData(data) {
 function showDetalleModal(data) {
     modalGuardar.hide()
     modalDetalle.show()
+    document.querySelector('.id').textContent = data.id
     document.querySelector('.nombre').textContent = data.nombre
     document.querySelector('.stock').textContent = data.stock
     document.querySelector('.precio').textContent = data.precio

@@ -79,24 +79,24 @@
                     </div>
                     <div class="modal-body">
                         <div class="row mb-1">
-                            <span class="col-6"> ID: </span>
-                            <label class="id col-6">[ID]</label>
+                            <span class="col-6"> ID</span>
+                            <label class="id col-6"></label>
                         </div>
                         <div class="row mb-1">
-                            <span class="col-6"> Nombre: </span>
-                            <label class="nombre col-6">[nombre]</label>
+                            <span class="col-6"> Nombre</span>
+                            <label class="nombre col-6"></label>
                         </div>
                         <div class="row mb-1">
-                            <span class="col-6" class="col"> Descripcion: </span>
-                            <label class="descripcion col-6">[descripcion]</label>
+                            <span class="col-6" class="col"> Descripcion</span>
+                            <label class="descripcion col-6"></label>
                         </div>
                         <div class="row mb-1">
-                            <span class="col-6"> Fecha de igreso: </span>
-                            <label class="fecha_ingreso col-6">[fecha]</label>
+                            <span class="col-6"> Fecha de igreso</span>
+                            <label class="fecha_ingreso col-6"></label>
                         </div>
                         <div class="row mb-1">
-                            <span class="col-6"> Fecha de modifiacion: </span>
-                            <label class="fecha_modificacion col-6">[fecha]</label>
+                            <span class="col-6"> Fecha de modifiacion</span>
+                            <label class="fecha_modificacion col-6"></label>
                         </div>
                     </div>
                     <div class="modal-footer">

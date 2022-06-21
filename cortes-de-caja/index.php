@@ -12,9 +12,9 @@
 <body>
     <?php include '../includes/navbar.php' ?>
     <div class="container p-2">
-        <h2>Cortes de caja</h2>
+        <h2>Historial de cortes de caja</h2>
 
-        <a class="btn btn-primary" href="/realizar-venta">Realizar corte del día </a>
+        <a class="btn btn-primary" href="/realizar-corte">Realizar corte del día </a>
 
         <!-- Tabla de visualizacion de datos -->
         <div class="card">

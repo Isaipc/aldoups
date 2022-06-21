@@ -49,7 +49,7 @@
                         </div>
                         <div class="modal-body px-5">
                             <!-- Lista de errores -->
-                            <div class="alert alert-danger modal-error" role="alert">
+                            <div class="alert alert-danger modal-error d-none" role="alert">
                                 <ul id="errores"></ul>
                             </div>
 

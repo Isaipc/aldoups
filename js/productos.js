@@ -137,7 +137,8 @@ function validaciones() {
     }
 
     _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
-    modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
+    if (!valid)
+        modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
 
     return valid
 }

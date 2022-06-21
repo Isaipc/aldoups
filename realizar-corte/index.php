@@ -11,6 +11,8 @@
 
 <body>
     <?php include '../includes/navbar.php'; ?>
+    <?php include '../cortes-de-caja/mostrar_ventas_del_dia.php'; ?>
+    <?php include '../cortes-de-caja/mostrar_corte_anterior.php'; ?>
 
     <div class="container p-2">
         <h2>Realizar corte de caja</h2>
@@ -21,31 +23,40 @@
                         <table class="table table-md table-striped table-responsive">
                             <thead>
                                 <tr>
-                                    <th>Venta</th>
-                                    <th>Total importe</th>
+                                    <th>No. venta</th>
                                     <th>Fecha</th>
+                                    <th class="text-end">Total importe</th>
                                 </tr>
                             </thead>
-                            <tbody id="items"></tbody>
+                            <tbody id="items">
+                                <?php foreach ($ventas as $key => $v) { ?>
+                                    <tr>
+                                        <td>
+                                            <a href="/ventas/detalles?id=<?= $v->id ?>" class="text-decoration-none">
+                                                <?= $v->id ?>
+                                            </a>
+                                        </td>
+                                        <td><?= $v->fecha_ingreso ?></td>
+                                        <td class="text-end">$<?= $v->total ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
                         </table>
                         <div class="d-flex justify-content-end">
                             <h4 class="me-4">Total</h4>
-                            <h4 id="total">0</h4>
+                            <h4 id="total"> $<?= $efectivo_esperado ?></h4>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 p-3">
-                <div class="alert alert-danger error d-none">
-                    <ul id="errores"></ul>
-                </div>
                 <form action="" id="form">
                     <div class="row mb-3">
                         <div class="col-xl-4 col-lg-12">
                             <label for="fecha">Fecha de corte</label>
                         </div>
                         <div class="col">
-                            <input type="text" name="fecha" id="fecha" class="form-control" disabled>
+                            <input type="text" name="fecha" id="fecha" class="form-control" value="<?= $dt_inicio->format('d/m/Y') ?>" disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -53,7 +64,7 @@
                             <label for="fondo_anterior">Fondo anterior</label>
                         </div>
                         <div class="col">
-                            <input type="text" id="fondo_anterior" class="form-control" disabled>
+                            <input type="text" id="fondo_anterior" class="form-control" value="<?= $corte_anterior->efectivo_contado ?? 0 ?>" disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -61,7 +72,12 @@
                             <label for="efectivo_esperado">Efectivo esperado</label>
                         </div>
                         <div class="col">
-                            <input type="text" id="efectivo_esperado" class="form-control" disabled>
+                            <input type="text" id="efectivo_esperado" class="form-control" value="<?= $efectivo_esperado ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="alert alert-danger error d-none">
+                            <ul id="errores"></ul>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -81,7 +97,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
     <?php include '../includes/scripts.php' ?>

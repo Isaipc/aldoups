@@ -1,40 +1,31 @@
 // @Imports 
-import { cargar, cargarTodos } from './servicios/ventas.operaciones'
-
-//Elementos necesarios
-const ventas = document.getElementById('items')
-
-mostrarTodos()
+import { cargarTodos } from './servicios/ventas.operaciones'
+import { dt_language_options } from './servicios/constants'
 
 // @Funciones
-function mostrarTodos() {
-    cargarTodos()
-        .then(data => renderFilas(data))
-        .catch(error => console.log(error))
-}
-
-function mostrarElemento(id) {
-
-    const data = { id: id }
-
-    cargar(data)
-        .then(data => console.log(data))
-        .catch(error => console.log(error))
-}
-
-function renderFilas(data) {
-
-    ventas.innerHTML = ''
-
-    data.forEach((d, index) => {
-        const fila =
-            `<tr>` +
-            `<td> <a href="detalles/?id=${d.id}" class="text-decoration-none">${d.id}</a></td>` +
-            `<td> $${d.total}</td>` +
-            `<td> ${d.fecha_ingreso} </td>` +
-            `<td> </td>` +
-            `</tr>`
-
-        ventas.insertAdjacentHTML('beforeend', fila)
-    })
-}
+let table = new DataTable('#datatable', {
+    language: dt_language_options,
+    paginate: false,
+    info: false,
+    search: {
+        return: true
+    },
+    ajax: (d, cb) => {
+        cargarTodos()
+            .then(data => cb(data))
+            .catch(error => console.log(error))
+    },
+    columns: [
+        { data: null },
+        { data: 'total' },
+        { data: 'fecha_ingreso' },
+    ],
+    columnDefs: [
+        {
+            targets: 0,
+            render: (data, type, row, meta) => {
+                return `<a href="detalles?id=${data.id}" class="text-decoration-none btn-show">${data.id}</a>`
+            }
+        },
+    ]
+})

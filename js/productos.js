@@ -79,7 +79,7 @@ function validaciones() {
 
 function mostrarElemento(data) {
     cargar(data)
-        .then(data => showModalDetalles(data))
+        .then(data => showDetalleModal(data))
         .catch(error => console.log(error))
 }
 
@@ -146,7 +146,7 @@ function showModalEditar(data) {
     _descripcion.value = data.descripcion
 }
 
-function showModalDetalles(data) {
+function showDetalleModal(data) {
     modalGuardar.hide()
     modalDetalle.show()
     document.querySelector('.id').textContent = data.id

@@ -21,7 +21,7 @@
         <!-- Tabla de visualizacion de datos -->
         <div class="card">
             <div class="card-body">
-                <table class="table table-responsive table-hover table-striped">
+                <table id="datatable" class="table table-responsive table-hover table-striped">
                     <thead>
                         <th>#</th>
                         <th>Nombre</th>
@@ -30,7 +30,7 @@
                         <th>Fecha de modificacion</th>
                         <th>Acciones</th>
                     </thead>
-                    <tbody id="categorias"></tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>

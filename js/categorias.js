@@ -1,6 +1,8 @@
 // @Imports 
 import { agregar, editar, cargar, eliminar, cargarTodos } from './servicios/categorias.operaciones'
 import { estaVacio } from './validaciones'
+import { categorias_url as _url } from './servicios/constants'
+import { dt_language_options as dtLanguageOptions } from './servicios/constants'
 
 // @Componentes BS5 
 const modalGuardarEl = document.getElementById('modalGuardar')
@@ -17,7 +19,19 @@ const _nombre = document.getElementById('nombre')
 const _descripcion = document.getElementById('descripcion')
 
 // Ejecutar funciones al cargar la pagina:
-mostrarTodos()
+$('#datatable').DataTable({
+    language: dtLanguageOptions,
+    ajax: {
+        url: `${_url}/list`
+    },
+    columns: [
+        { data: 'id' },
+        { data: 'nombre', },
+        { data: 'descripcion' },
+        { data: 'fecha_ingreso' },
+        { data: 'fecha_modificacion' },
+    ]
+})
 
 // @Funciones
 function mostrarTodos() {
@@ -119,7 +133,7 @@ function validaciones() {
     }
 
     _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
-    
+
     if (!valid)
         modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
 

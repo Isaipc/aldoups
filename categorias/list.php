@@ -7,9 +7,9 @@ try {
     $sql = $conn->prepare('SELECT * FROM categorias');
     $sql->execute();
 
-    $result = $sql->fetchAll();
-    
-    echo json_encode($result);
+    $result = $sql->fetchAll(PDO::FETCH_OBJ);
+
+    echo json_encode(['data' => $result]);
 
 } catch (PDOException $e) {
     die('ERROR: ' . $e->getMessage());

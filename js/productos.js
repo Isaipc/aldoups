@@ -2,6 +2,7 @@
 import { agregar, editar, cargar, eliminar, cargarTodos } from './servicios/productos.operaciones'
 import { cargarTodos as cargarCategorias } from './servicios/categorias.operaciones'
 import { estaVacio, esNumeroPositivo } from './validaciones'
+import { dt_language_options, productos_url as _url } from './servicios/constants'
 
 // @Componentes BS5 
 const modalGuardarEl = document.getElementById('modalGuardar')
@@ -20,7 +21,6 @@ const _descripcion = document.getElementById('descripcion')
 const _categoria = document.getElementById('categoria')
 
 // Ejecutar funciones al cargar la pagina:
-mostrarProductos()
 mostrarCategorias()
 
 // @Funciones
@@ -143,6 +143,24 @@ function validaciones() {
 
     return valid
 }
+
+
+$('#datatable').DataTable({
+    language: dt_language_options,
+    ajax: {
+        url: `${_url}/list`,
+    },
+    columns: [
+        { data: 'id' },
+        { data: 'nombre' },
+        { data: 'precio' },
+        { data: 'stock' },
+        { data: 'categoria' },
+        { data: 'fecha_ingreso' },
+        { data: 'fecha_modificacion' },
+        { data: null },
+    ]
+})
 
 function renderFilas(data) {
 

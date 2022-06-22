@@ -17,8 +17,32 @@ const _id = document.getElementById('id')
 const _nombre = document.getElementById('nombre')
 const _descripcion = document.getElementById('descripcion')
 
-// Ejecutar funciones al cargar la pagina:
 // @Funciones
+function validaciones() {
+
+    let valid = true
+    let errores = []
+
+    if (estaVacio(_nombre.value)) {
+        errores.push(`Debe llenar el campo 'nombre'`)
+        _nombre.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_descripcion.value)) {
+        errores.push(`Debe llenar el campo 'descripcion'`)
+        _descripcion.classList.add('is-invalid')
+        valid = false
+    }
+
+    _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
+
+    if (!valid)
+        modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
+
+    return valid
+}
+
 function mostrarElemento(data) {
     showModalDetalles(data)
 }
@@ -82,31 +106,6 @@ function showModalDetalles(data) {
     modalDetalleEl.querySelector('.fecha_modificacion').textContent = data.fecha_modificacion
 }
 
-function validaciones() {
-
-    let valid = true
-    let errores = []
-
-    if (estaVacio(_nombre.value)) {
-        errores.push(`Debe llenar el campo 'nombre'`)
-        _nombre.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (estaVacio(_descripcion.value)) {
-        errores.push(`Debe llenar el campo 'descripcion'`)
-        _descripcion.classList.add('is-invalid')
-        valid = false
-    }
-
-    _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
-
-    if (!valid)
-        modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
-
-    return valid
-}
-
 // @Eventos
 modalGuardarEl.addEventListener('show.bs.modal', () => {
     modalGuardarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
@@ -159,22 +158,21 @@ let table = new DataTable('#datatable', {
         },
         {
             targets: 1,
-            render: (data, type, row, meta) => {
-                return `<a href="#" class="text-decoration-none btn-show" data-row="${meta.row}">${data.nombre}</a>`
-            }
+            render: (data, type, row, meta) =>
+                `<a href="#" class="text-decoration-none btn-show" data-row="${meta.row}">${data.nombre}</a>`
+
         },
         {
             targets: -1,
-            render: (data, type, row, meta) => {
-                return `<div>
-                            <button class="btn btn-sm btn-danger btn-delete" data-row="${meta.row}">
-                                <i class="bi bi-x icon-delete"></i>
-                            </button>
-                            <button class="btn btn-sm btn-primary btn-edit" data-row="${meta.row}">
-                                <i class="bi bi-pencil-fill icon-edit"></i>
-                            </button>
-                        </div>`
-            }
+            render: (data, type, row, meta) =>
+                `<div>
+                    <button class="btn btn-sm btn-danger btn-delete" data-row="${meta.row}">
+                        <i class="bi bi-x icon-delete"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary btn-edit" data-row="${meta.row}">
+                        <i class="bi bi-pencil-fill icon-edit"></i>
+                    </button>
+                </div>`
         }
     ]
 })

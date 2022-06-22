@@ -14,6 +14,7 @@ const _form = document.getElementById('form')
 const _errores = document.getElementById('errores')
 const _producto = document.getElementById('producto')
 const _precio = document.getElementById('precio')
+const _stock = document.getElementById('stock')
 const _cantidad = document.getElementById('cantidad')
 const _total = document.getElementById('total')
 
@@ -53,7 +54,7 @@ function validaciones() {
 
 function cargarProductosOptions() {
     cargarTodos()
-        .then(data => renderProductosOptions(data))
+        .then(data => renderProductosOptions(data.data))
         .catch(error => console.log(error))
 }
 function calcularTotal() {
@@ -92,6 +93,7 @@ function agregarProducto() {
 
 function setCurrentProducto(data) {
     _precio.value = data.precio
+    _stock.value = data.stock
 
     currentProducto = {
         id: data.id,

@@ -29,9 +29,15 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col">
+                        <div class="col-lg-6">
                             <label for="cantidad">Precio</label>
                             <input type="number" name="precio" id="precio" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="cantidad">Stock</label>
+                            <input type="number" name="stock" id="stock" class="form-control" disabled>
                         </div>
                         <div class="col">
                             <label for="cantidad">Cantidad</label>

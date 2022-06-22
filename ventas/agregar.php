@@ -51,16 +51,26 @@ try {
     $stmt->execute([$venta_id]);
     $json = json_encode($stmt->fetchObject());
 
-    // insertar productos vendidos
-    $sql = 'INSERT INTO producto_vendido(producto_id, venta_id, cantidad, precio)
-     VALUES(:producto_id, :venta_id, :cantidad, :precio)';
-
     foreach ($data as $key => $d) {
+        // insertar productos vendidos
+        $sql = 'INSERT INTO producto_vendido(producto_id, venta_id, cantidad, precio)
+        VALUES(:producto_id, :venta_id, :cantidad, :precio)';
+
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':producto_id', $d->id);
         $stmt->bindParam(':venta_id', $venta_id);
         $stmt->bindParam(':cantidad', $d->cantidad);
         $stmt->bindParam(':precio', $d->precio);
+        $stmt->execute();
+
+        // actualiza el stock de los productos
+        $sql = 'UPDATE productos SET 
+            stock = stock - :cantidad
+        WHERE id = :id';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $d->id);
+        $stmt->bindParam(':cantidad', $d->cantidad);
         $stmt->execute();
     }
 

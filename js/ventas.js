@@ -17,15 +17,18 @@ let table = new DataTable('#datatable', {
     },
     columns: [
         { data: null },
-        { data: 'total' },
+        { data: null },
         { data: 'fecha_ingreso' },
     ],
     columnDefs: [
         {
             targets: 0,
-            render: (data, type, row, meta) => {
-                return `<a href="detalles?id=${data.id}" class="text-decoration-none btn-show">${data.id}</a>`
-            }
+            render: (data, type, row, meta) =>
+                `<a href="detalles?id=${data.id}" class="text-decoration-none">${data.id}</a>`
         },
+        {
+            targets: 1,
+            render: (data, type, row, meta) => `$${data.total}`
+        }
     ]
 })

@@ -19,7 +19,7 @@ try {
 
     $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-    echo json_encode($result);
+    echo json_encode(['data' => $result]);
     
 } catch (PDOException $e) {
     die('ERROR: ' . $e->getMessage());

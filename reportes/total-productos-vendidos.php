@@ -18,14 +18,14 @@
         <!-- Tabla de visualizacion de datos -->
         <div class="card">
             <div class="card-body">
-                <table class="table table-responsive table-hover table-striped">
+                <table id="datatable" class="table table-responsive table-hover table-striped">
                     <thead>
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Total vendidos</th>
                         <th>Categoria</th>
                     </thead>
-                    <tbody id="items"></tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>

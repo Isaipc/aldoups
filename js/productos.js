@@ -19,6 +19,9 @@ const _stock = document.getElementById('stock')
 const _descripcion = document.getElementById('descripcion')
 const _categoria = document.getElementById('categoria')
 
+// Ejecutar funciones al cargar la pagina:
+mostrarCategorias()
+
 // @Funciones
 function mostrarElemento(data) {
     cargar(data)
@@ -27,7 +30,9 @@ function mostrarElemento(data) {
 }
 
 function editarElemento(data) {
-    showModalEditar(data)
+    cargar(data)
+        .then(data => showModalEditar(data))
+        .catch(error => console.log(error))
 }
 
 function eliminarElemento(data) {
@@ -42,7 +47,7 @@ function eliminarElemento(data) {
 
 function mostrarCategorias() {
     cargarCategorias()
-        .then(data => renderCategoriasOptions(data))
+        .then(data => renderCategoriasOptions(data.data))
         .catch(error => console.log(error))
 }
 

@@ -20,7 +20,7 @@
                 <table id="datatable" class="table table-responsive table-hover table-striped">
                     <thead>
                         <th>No. venta</th>
-                        <th>Total</th>
+                        <th>Total importe</th>
                         <th>Fecha de ingreso</th>
                         <th>Acciones</th>
                     </thead>

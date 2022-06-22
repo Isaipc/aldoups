@@ -62,7 +62,7 @@
                     </label>
                 </div>
                 <div class="row mb-1">
-                    <span class="col-2" class="col"> Total: </span>
+                    <span class="col-2" class="col"> Total importe: </span>
                     <label class="descripcion col-6">
                         $<?= $venta->total ?> MXN
                     </label>

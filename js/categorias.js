@@ -21,6 +21,11 @@ const _descripcion = document.getElementById('descripcion')
 // Ejecutar funciones al cargar la pagina:
 $('#datatable').DataTable({
     language: dtLanguageOptions,
+    paginate: false,
+    info: false,
+    search: {
+        return: true
+    },
     ajax: {
         url: `${_url}/list`
     },

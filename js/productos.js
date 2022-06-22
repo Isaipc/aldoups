@@ -11,7 +11,6 @@ const modalDetalle = new bootstrap.Modal('#modalDetalle')
 
 // Elementos necesarios
 const _form = document.getElementById('form')
-const _productos = document.getElementById('productos')
 const _errores = document.getElementById('errores')
 const _id = document.getElementById('id')
 const _nombre = document.getElementById('nombre')
@@ -20,13 +19,24 @@ const _stock = document.getElementById('stock')
 const _descripcion = document.getElementById('descripcion')
 const _categoria = document.getElementById('categoria')
 
-// Ejecutar funciones al cargar la pagina:
-mostrarCategorias()
-
 // @Funciones
-function mostrarProductos() {
-    cargarTodos()
-        .then(data => renderFilas(data))
+function mostrarElemento(data) {
+    cargar(data)
+        .then(data => showModalDetalles(data))
+        .catch(error => console.log(error))
+}
+
+function editarElemento(data) {
+    showModalEditar(data)
+}
+
+function eliminarElemento(data) {
+
+    if (!confirm('¿Estas seguro(a)?'))
+        return false;
+
+    eliminar(data)
+        .then(data => table.ajax.reload())
         .catch(error => console.log(error))
 }
 
@@ -41,14 +51,14 @@ function guardarProducto(data) {
         agregar(data)
             .then(data => {
                 showDetalleModal(data)
-                mostrarProductos()
+                table.ajax.reload()
             })
             .catch((error) => console.log(error))
     } else {
         editar(data)
             .then(data => {
                 showDetalleModal(data)
-                mostrarProductos()
+                table.ajax.reload()
             })
             .catch((error) => console.log(error))
     }
@@ -65,7 +75,7 @@ function getFormData() {
     }
 }
 
-function setFormData(data) {
+function showModalEditar(data) {
     modalGuardar.show()
     modalGuardarEl.querySelector('.modal-title').textContent = 'Editar producto'
 
@@ -77,7 +87,7 @@ function setFormData(data) {
     _descripcion.value = data.descripcion
 }
 
-function showDetalleModal(data) {
+function showModalDetalles(data) {
     modalGuardar.hide()
     modalDetalle.show()
     document.querySelector('.id').textContent = data.id
@@ -144,90 +154,6 @@ function validaciones() {
     return valid
 }
 
-
-$('#datatable').DataTable({
-    language: dt_language_options,
-    paginate: false,
-    info: false,
-    search: {
-        return: true
-    },
-    ajax: {
-        url: `${_url}/list`,
-    },
-    columns: [
-        { data: 'id' },
-        { data: 'nombre' },
-        { data: 'precio' },
-        { data: 'stock' },
-        { data: 'categoria' },
-        { data: 'fecha_ingreso' },
-        { data: 'fecha_modificacion' },
-        { data: null },
-    ]
-})
-
-function renderFilas(data) {
-
-    const rows = data.map((d, index) => {
-
-        return `<tr>` +
-            `<td> ${index + 1} </td>` +
-            `<td>
-                <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.nombre}</a>
-             </td>` +
-            `<td> $${d.precio}</td>` +
-            `<td> ${d.stock} </td>` +
-            `<td> ${d.categoria} </td>` +
-            `<td> ${d.fecha_ingreso} </td>` +
-            `<td> ${d.fecha_modificacion}</td>` +
-            `<td>
-                <button type="button" class="btn btn-danger btn-sm me-1 btn-delete" data-id="${d.id}">
-                    <i class="bi bi-x"></i>
-                </button>
-                <button type="button" class="btn btn-primary btn-sm btn-edit" data-id="${d.id}">
-                    <i class="bi bi-pencil-fill"></i>
-                </button>
-            </td>` +
-            `</tr>`
-    })
-
-    _productos.innerHTML = rows.join('')
-
-    document.querySelectorAll('a.btn-show').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-
-            const params = { id: btn.dataset.id }
-            cargar(params)
-                .then(data => showDetalleModal(data))
-                .catch(error => console.log(error))
-        })
-    })
-
-    document.querySelectorAll('button.btn-delete').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-
-            if (!confirm('¿Estas seguro(a)?'))
-                return false;
-
-            const params = { id: btn.dataset.id }
-            eliminar(params)
-                .then(data => mostrarProductos())
-                .catch(error => console.log(error))
-        })
-    })
-
-    document.querySelectorAll('button.btn-edit').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-
-            const params = { id: btn.dataset.id }
-            cargar(params)
-                .then(data => setFormData(data))
-                .catch(error => console.log(error))
-        })
-    })
-}
-
 function renderCategoriasOptions(data) {
 
     const options = data.map((d, index) => {
@@ -261,3 +187,67 @@ _precio.addEventListener('keydown', () => _precio.classList.remove('is-invalid')
 _stock.addEventListener('keydown', () => _stock.classList.remove('is-invalid'))
 _descripcion.addEventListener('keydown', () => _descripcion.classList.remove('is-invalid'))
 _categoria.addEventListener('change', () => _categoria.classList.remove('is-invalid'))
+
+let table = new DataTable('#datatable', {
+    language: dt_language_options,
+    paginate: false,
+    info: false,
+    search: {
+        return: true
+    },
+    ajax: (d, cb) => {
+        cargarTodos()
+            .then(data => cb(data))
+            .catch(error => console.log(error))
+    },
+    columns: [
+        { data: null },
+        { data: null },
+        { data: 'precio' },
+        { data: 'stock' },
+        { data: 'categoria' },
+        { data: 'fecha_ingreso' },
+        { data: 'fecha_modificacion' },
+        { data: null },
+    ],
+    columnDefs: [
+        {
+            targets: 0,
+            render: (data, type, row, meta) => meta.row + 1
+        },
+        {
+            targets: 1,
+            render: (data, type, row, meta) =>
+                `<a href="#" class="text-decoration-none btn-show" data-row="${meta.row}">${data.nombre}</a>`
+        },
+        {
+            targets: -1,
+            render: (data, type, row, meta) =>
+                `<div>
+                    <button class="btn btn-sm btn-danger btn-delete" data-row="${meta.row}">
+                        <i class="bi bi-x icon-delete"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary btn-edit" data-row="${meta.row}">
+                        <i class="bi bi-pencil-fill icon-edit"></i>
+                    </button>
+                </div>`
+        }
+    ]
+})
+
+document.addEventListener('click', event => {
+    let target = event.target
+
+    if (event.target.classList.contains('icon-delete') || event.target.classList.contains('icon-edit'))
+        target = event.target.parentNode
+
+    const row = target.dataset.row
+    const data = table.row(row).data()
+
+    if (target.classList.contains('btn-delete'))
+        eliminarElemento(data)
+    else if (target.classList.contains('btn-edit'))
+        editarElemento(data)
+    else if (target.classList.contains('btn-show'))
+        mostrarElemento(data)
+})

@@ -2,23 +2,11 @@
 import { agregar } from './servicios/cortes-de-caja.operaciones'
 import { estaVacio, esNumeroPositivo } from './validaciones'
 
-
-// Elementos necesarios
+// Elementos de la pagina
 const _errores = document.getElementById('errores')
 const _efectivo_contado = document.getElementById('efectivo_contado')
 
 // @Funciones
-
-function guardar(data) {
-
-    agregar(data)
-        .then(data => {
-            alert('holi :)')
-            console.log(data)
-        })
-        .catch((error) => console.log(error))
-}
-
 function validaciones() {
 
     let valid = true
@@ -42,6 +30,16 @@ function validaciones() {
         document.body.querySelector('.error').classList.remove('d-none')
 
     return valid
+}
+
+function guardar(data) {
+
+    agregar(data)
+        .then(data => {
+            alert('holi :)')
+            console.log(data)
+        })
+        .catch((error) => console.log(error))
 }
 
 // @Eventos

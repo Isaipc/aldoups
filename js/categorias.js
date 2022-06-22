@@ -10,7 +10,7 @@ const modalGuardar = new bootstrap.Modal(modalGuardarEl)
 const modalDetalleEl = document.getElementById('modalDetalle')
 const modalDetalle = new bootstrap.Modal(modalDetalleEl)
 
-// Elementos necesarios
+// Elementos de la pagina 
 const _errores = document.getElementById('errores')
 const form = document.getElementById('form')
 const _id = document.getElementById('id')

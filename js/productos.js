@@ -9,7 +9,7 @@ const modalGuardarEl = document.getElementById('modalGuardar')
 const modalGuardar = new bootstrap.Modal(modalGuardarEl)
 const modalDetalle = new bootstrap.Modal('#modalDetalle')
 
-// Elementos necesarios
+// Elementos de la pagina 
 const _form = document.getElementById('form')
 const _errores = document.getElementById('errores')
 const _id = document.getElementById('id')
@@ -23,6 +23,60 @@ const _categoria = document.getElementById('categoria')
 mostrarCategorias()
 
 // @Funciones
+function validaciones() {
+
+    let valid = true
+    let errores = []
+
+    if (estaVacio(_nombre.value)) {
+        errores.push(`Debe llenar el campo 'nombre'`)
+        _nombre.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_stock.value)) {
+        errores.push(`Debe llenar el campo 'stock'`)
+        _stock.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (!esNumeroPositivo(_stock.value)) {
+        errores.push(`El campo 'stock' solo puede tener valor numerico positivo`)
+        _stock.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_precio.value)) {
+        errores.push(`Debe llenar el campo 'precio'`)
+        _precio.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (!esNumeroPositivo(_precio.value)) {
+        errores.push(`El campo 'precio' solo puede tener valor numerico positivo`)
+        _precio.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_descripcion.value)) {
+        errores.push(`Debe llenar el campo 'descripcion'`)
+        _descripcion.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_categoria.value)) {
+        errores.push(`Debe seleccionar 'categoria'`)
+        _categoria.classList.add('is-invalid')
+        valid = false
+    }
+
+    _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
+    if (!valid)
+        modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
+
+    return valid
+}
+
 function mostrarElemento(data) {
     cargar(data)
         .then(data => showModalDetalles(data))
@@ -103,60 +157,6 @@ function showModalDetalles(data) {
     document.querySelector('.descripcion').textContent = data.descripcion
     document.querySelector('.fecha_ingreso').textContent = data.fecha_ingreso
     document.querySelector('.fecha_modificacion').textContent = data.fecha_modificacion
-}
-
-function validaciones() {
-
-    let valid = true
-    let errores = []
-
-    if (estaVacio(_nombre.value)) {
-        errores.push(`Debe llenar el campo 'nombre'`)
-        _nombre.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (estaVacio(_stock.value)) {
-        errores.push(`Debe llenar el campo 'stock'`)
-        _stock.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (!esNumeroPositivo(_stock.value)) {
-        errores.push(`El campo 'stock' solo puede tener valor numerico positivo`)
-        _stock.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (estaVacio(_precio.value)) {
-        errores.push(`Debe llenar el campo 'precio'`)
-        _precio.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (!esNumeroPositivo(_precio.value)) {
-        errores.push(`El campo 'precio' solo puede tener valor numerico positivo`)
-        _precio.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (estaVacio(_descripcion.value)) {
-        errores.push(`Debe llenar el campo 'descripcion'`)
-        _descripcion.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (estaVacio(_categoria.value)) {
-        errores.push(`Debe seleccionar 'categoria'`)
-        _categoria.classList.add('is-invalid')
-        valid = false
-    }
-
-    _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
-    if (!valid)
-        modalGuardarEl.querySelector('.modal-error').classList.remove('d-none')
-
-    return valid
 }
 
 function renderCategoriasOptions(data) {

@@ -22,6 +22,35 @@ const _total = document.getElementById('total')
 cargarProductosOptions()
 
 // @Funciones
+function validaciones() {
+
+    let valid = true
+    let errores = []
+
+    if (estaVacio(_producto.value)) {
+        errores.push(`Debe llenar el campo 'producto'`)
+        _producto.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (estaVacio(_cantidad.value)) {
+        errores.push(`Debe llenar el campo 'cantidad'`)
+        _cantidad.classList.add('is-invalid')
+        valid = false
+    }
+
+    if (currentProducto.cantidad > currentProducto.stock) {
+        errores.push(`No hay suficiente stock`)
+        _cantidad.classList.add('is-invalid')
+        valid = false
+    }
+
+    _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
+    document.body.querySelector('.error').classList.remove('d-none')
+
+    return valid
+}
+
 function cargarProductosOptions() {
     cargarTodos()
         .then(data => renderProductosOptions(data))
@@ -72,35 +101,6 @@ function setCurrentProducto(data) {
         cantidad: parseInt(_cantidad.value),
         monto: 0
     }
-}
-
-function validaciones() {
-
-    let valid = true
-    let errores = []
-
-    if (estaVacio(_producto.value)) {
-        errores.push(`Debe llenar el campo 'producto'`)
-        _producto.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (estaVacio(_cantidad.value)) {
-        errores.push(`Debe llenar el campo 'cantidad'`)
-        _cantidad.classList.add('is-invalid')
-        valid = false
-    }
-
-    if (currentProducto.cantidad > currentProducto.stock) {
-        errores.push(`No hay suficiente stock`)
-        _cantidad.classList.add('is-invalid')
-        valid = false
-    }
-
-    _errores.innerHTML = errores.map(e => `<li>${e}</li>`).join('')
-    document.body.querySelector('.error').classList.remove('d-none')
-
-    return valid
 }
 
 function renderProductosOptions(data) {

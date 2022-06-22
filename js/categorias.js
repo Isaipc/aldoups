@@ -129,13 +129,8 @@ form.addEventListener('submit', event => {
     guardarElemento(data)
 })
 
-_nombre.addEventListener('keydown', () => {
-    _nombre.classList.remove('is-invalid')
-})
-
-_descripcion.addEventListener('keydown', () => {
-    _descripcion.classList.remove('is-invalid')
-})
+_nombre.addEventListener('keydown', () => _nombre.classList.remove('is-invalid'))
+_descripcion.addEventListener('keydown', () => _descripcion.classList.remove('is-invalid'))
 
 let table = new DataTable('#datatable', {
     language: dt_language_options,

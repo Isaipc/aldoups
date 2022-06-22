@@ -42,7 +42,7 @@
                         Reportes
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/reportes/productos-vendidos.php">Productos vendidos</a></li>
+                        <li><a class="dropdown-item" href="/reportes/total-productos-vendidos.php">Total de productos vendidos</a></li>
                     </ul>
                 </li>
             </ul>

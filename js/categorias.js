@@ -1,8 +1,7 @@
 // @Imports 
 import { agregar, editar, cargar, eliminar, cargarTodos } from './servicios/categorias.operaciones'
 import { estaVacio } from './validaciones'
-import { categorias_url as _url } from './servicios/constants'
-import { dt_language_options as dtLanguageOptions } from './servicios/constants'
+import { dt_language_options } from './servicios/constants'
 
 // @Componentes BS5 
 const modalGuardarEl = document.getElementById('modalGuardar')
@@ -19,59 +18,22 @@ const _nombre = document.getElementById('nombre')
 const _descripcion = document.getElementById('descripcion')
 
 // Ejecutar funciones al cargar la pagina:
-$('#datatable').DataTable({
-    language: dtLanguageOptions,
-    paginate: false,
-    info: false,
-    search: {
-        return: true
-    },
-    ajax: {
-        url: `${_url}/list`
-    },
-    columns: [
-        { data: 'id' },
-        { data: 'nombre', },
-        { data: 'descripcion' },
-        { data: 'fecha_ingreso' },
-        { data: 'fecha_modificacion' },
-    ]
-})
-
 // @Funciones
-function mostrarTodos() {
-    cargarTodos()
-        .then(data => renderFilas(data))
-        .catch(error => console.log(error))
+function mostrarElemento(data) {
+    showModalDetalles(data)
 }
 
-function mostrarElemento(id) {
-
-    const data = { id: id }
-
-    cargar(data)
-        .then(data => showModalDetalles(data))
-        .catch(error => console.log(error))
+function editarElemento(data) {
+    showModalEditar(data)
 }
 
-function editarElemento(id) {
-
-    const data = { id: id }
-
-    cargar(data)
-        .then(data => showModalEditar(data))
-        .catch(error => console.log(error))
-}
-
-function eliminarElemento(id) {
+function eliminarElemento(data) {
 
     if (!confirm('¿Estas seguro(a)?'))
         return false;
 
-    const data = { id: id }
-
     eliminar(data)
-        .then(data => mostrarTodos())
+        .then(data => table.ajax.reload())
         .catch(error => console.log(error))
 }
 
@@ -81,14 +43,14 @@ function guardarElemento(data) {
         agregar(data)
             .then(data => {
                 showModalDetalles(data)
-                mostrarTodos()
+                table.ajax.reload()
             })
             .catch((error) => console.log(error))
     else
         editar(data)
             .then(data => {
                 showModalDetalles(data)
-                mostrarTodos()
+                table.ajax.reload()
             })
             .catch((error) => console.log(error))
 }
@@ -145,44 +107,6 @@ function validaciones() {
     return valid
 }
 
-function renderFilas(data) {
-
-    document.getElementById('categorias').innerHTML = ''
-
-    data.forEach((d, index) => {
-        const fila =
-            `<tr>` +
-            `<td> ${index + 1} </td>` +
-            `<td> <a href="#" class="text-decoration-none btn-show" data-id="${d.id}">${d.nombre}</a></td>` +
-            `<td> ${d.descripcion} </td>` +
-            `<td> ${d.fecha_ingreso} </td>` +
-            `<td> ${d.fecha_modificacion}</td>` +
-            `<td>
-                <button class="btn btn-danger btn-sm me-1 btn-delete" data-id="${d.id}">
-                    <i class="bi bi-x"></i>
-                </button>
-                <button class="btn btn-primary btn-sm btn-edit" data-id="${d.id}">
-                    <i class="bi bi-pencil-fill"></i>
-                </button>
-            </td>` +
-            `</tr>`
-
-        document.getElementById('categorias').insertAdjacentHTML('beforeend', fila)
-    })
-
-    document.querySelectorAll('.btn-show').forEach((btn) => {
-        btn.addEventListener('click', event => mostrarElemento(btn.dataset.id))
-    })
-
-    document.querySelectorAll('.btn-delete').forEach((btn) => {
-        btn.addEventListener('click', event => eliminarElemento(btn.dataset.id))
-    })
-
-    document.querySelectorAll('.btn-edit').forEach((btn) => {
-        btn.addEventListener('click', event => editarElemento(btn.dataset.id))
-    })
-}
-
 // @Eventos
 modalGuardarEl.addEventListener('show.bs.modal', () => {
     modalGuardarEl.querySelector('.modal-title').textContent = 'Nueva categoría'
@@ -211,4 +135,69 @@ _nombre.addEventListener('keydown', () => {
 
 _descripcion.addEventListener('keydown', () => {
     _descripcion.classList.remove('is-invalid')
+})
+
+let table = new DataTable('#datatable', {
+    language: dt_language_options,
+    paginate: false,
+    info: false,
+    search: {
+        return: true
+    },
+    ajax: (d, cb) => {
+        cargarTodos()
+            .then(data => cb(data))
+            .catch(error => console.log(error))
+    },
+    columns: [
+        { data: null },
+        { data: null, },
+        { data: 'descripcion' },
+        { data: 'fecha_ingreso' },
+        { data: 'fecha_modificacion' },
+        { data: null },
+    ],
+    columnDefs: [
+        {
+            targets: 0,
+            render: (data, type, row, meta) => meta.row + 1
+        },
+        {
+            targets: 1,
+            render: (data, type, row, meta) => {
+                return `<a href="#" class="text-decoration-none btn-show" data-row="${meta.row}">${data.nombre}</a>`
+            }
+        },
+        {
+            targets: -1,
+            render: (data, type, row, meta) => {
+                return `<div>
+                            <button class="btn btn-sm btn-danger btn-delete" data-row="${meta.row}">
+                                <i class="bi bi-x icon-delete"></i>
+                            </button>
+                            <button class="btn btn-sm btn-primary btn-edit" data-row="${meta.row}">
+                                <i class="bi bi-pencil-fill icon-edit"></i>
+                            </button>
+                        </div>`
+            }
+        }
+    ]
+})
+
+
+document.addEventListener('click', event => {
+    let target = event.target
+
+    if (event.target.classList.contains('icon-delete') || event.target.classList.contains('icon-edit'))
+        target = event.target.parentNode
+
+    const row = target.dataset.row
+    const data = table.row(row).data()
+
+    if (target.classList.contains('btn-delete'))
+        eliminarElemento(data)
+    else if (target.classList.contains('btn-edit'))
+        editarElemento(data)
+    else if (target.classList.contains('btn-show'))
+        mostrarElemento(data)
 })

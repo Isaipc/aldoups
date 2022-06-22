@@ -147,6 +147,11 @@ function validaciones() {
 
 $('#datatable').DataTable({
     language: dt_language_options,
+    paginate: false,
+    info: false,
+    search: {
+        return: true
+    },
     ajax: {
         url: `${_url}/list`,
     },

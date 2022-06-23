@@ -63,6 +63,7 @@
                                     <th>Precio</th>
                                     <th>Cantidad</th>
                                     <th>Monto</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="carrito"></tbody>

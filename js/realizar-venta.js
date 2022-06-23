@@ -76,18 +76,31 @@ function agregarProducto() {
 
         const item = document.getElementById(`producto-${data.id}`)
         item.querySelector('.cantidad').textContent = data.cantidad
-        item.querySelector('.monto').textContent = data.monto
+        item.querySelector('.monto').textContent = `$${data.monto}`
     }
     else {
         productos.push(data)
 
-        _carrito.innerHTML +=
-            `<tr id="producto-${data.id}">
-            <td class="nombre">${data.nombre}</td>
-            <td class="precio">$${data.precio}</td>
-            <td class="cantidad">${data.cantidad}</td>
-            <td class="monto text-end">$${data.monto}</td>
-        </tr>`
+        const row = `<tr id="producto-${data.id}">
+                <td class="nombre">${data.nombre}</td>
+                <td class="precio">$${data.precio}</td>
+                <td class="cantidad">${data.cantidad}</td>
+                <td class="monto text-end">$${data.monto}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger btn-delete" data-id="${data.id}">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </td>
+            </tr>`
+        _carrito.insertAdjacentHTML('beforeend', row)
+
+        const item = document.getElementById(`producto-${data.id}`)
+        const btn = item.querySelector('.btn-delete')
+
+        btn.addEventListener('click', event => {
+            item.remove()
+            productos = productos.filter((value) => value.id != data.id)
+        })
     }
 }
 
